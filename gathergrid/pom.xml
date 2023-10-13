@@ -8,6 +8,7 @@
   <groupId>com.gathergrid</groupId>
   <artifactId>gathergrid</artifactId>
   <version>1.0</version>
+  <packaging>war</packaging>
 
   <name>gathergrid</name>
   <!-- FIXME change it to the project's website -->
