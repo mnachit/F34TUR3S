@@ -1,6 +1,7 @@
 package com.gathergrid.entities;
 
 import javax.annotation.processing.Generated;
+import javax.validation.constraints.NotEmpty;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
@@ -40,39 +41,18 @@ public class User {
         this.id = id;
     }
 
-    public Name getName() {
-        return this.name;
-    }
-
-    public void setName(Name name) {
-        this.name = name;
-    }
-
-    public Email getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(Email email) {
-        this.email = email;
-    }
-
-    public Password getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(Password password) {
-        this.password = password;
-    }
-
 }
 
 @Embeddable
 class Name {
 
+    @NotEmpty(message = "Please enter your First Name")
     private String firstName;
 
+    @NotEmpty(message = "Please enter your Last Name")
     private String lastName;
 
+    @NotEmpty(message = "Please enter your User Name")
     private String userName;
 
     public Name() {
@@ -108,4 +88,48 @@ class Name {
         this.userName = userName;
     }
 
+}
+
+@Embeddable
+class Email {
+
+    @NotEmpty(message = "Please enter your Email")
+    private String email;
+
+    public Email() {
+    }
+
+    public Email(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+}
+
+@Embeddable
+class Password {
+
+    @NotEmpty(message = "Please enter your Password")
+    private String password;
+
+    public Password() {
+    }
+
+    public Password(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
