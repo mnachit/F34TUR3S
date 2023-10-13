@@ -1,1 +1,5 @@
+com\gathergrid\entities\Password.class
+com\gathergrid\entities\Email.class
+com\gathergrid\entities\Name.class
+com\gathergrid\entities\User.class
 com\gathergrid\App.class
