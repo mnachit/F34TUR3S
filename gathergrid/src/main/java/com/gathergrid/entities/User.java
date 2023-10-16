@@ -46,6 +46,7 @@ public class User {
 
     public Name getName() {
         return this.name;
+
     }
 
     public void setName(Name name) {
