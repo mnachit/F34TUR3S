@@ -9,7 +9,7 @@ public class InitDb extends HttpServlet {
     public void init() {
         try{
             super.init();
-            DbEntityManagerFactory.getManagerFactory();
+            DbEntityManagerFactory.getEntityManagerFactory();
         } catch (ServletException e) {
             e.printStackTrace();
         }
