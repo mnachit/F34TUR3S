@@ -99,6 +99,7 @@ cmake-build-*/
 out/
 .idea/
 .jpb/
+.vscode/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
