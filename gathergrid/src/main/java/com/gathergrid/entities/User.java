@@ -40,11 +40,10 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-
 }
 
 @Embeddable
-class Name {
+ class Name {
 
     @NotEmpty(message = "Please enter your First Name")
     @Pattern(regexp = "^[^\\s]*$", message = "No Space Allowed")
