@@ -7,18 +7,15 @@ import lombok.Setter;
 import java.sql.Date;
 
 @Entity
+@Setter@Getter
 public class Ticket {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    @Setter@Getter
     private Long id;
-    @Setter@Getter
     private Date date_of_reservation;
     @ManyToOne
-    @Setter@Getter
     private User user;
     @ManyToOne
-    @Setter@Getter
     private Event event;
 
     public Ticket(Date date_of_reservation, User user, Event event) {

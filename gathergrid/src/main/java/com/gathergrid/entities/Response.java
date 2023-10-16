@@ -4,13 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-
+@Setter @Getter
 public class Response<T> {
-    @Setter @Getter
     private String message;
-    @Setter@Getter
     private Object data;
-    @Setter@Getter
     private int status;
 
     public Response(String message, Object data, int status) {
