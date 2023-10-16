@@ -4,12 +4,14 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
 public class DbEntityManagerFactory {
+    
    private static EntityManagerFactory emf;
 
-   private  static EntityManager em;
+   private static EntityManager em;
 
     private DbEntityManagerFactory() {
     }
+
     public static EntityManagerFactory getEntityManagerFactory() {
         if(emf == null) {
             emf = jakarta.persistence.Persistence.createEntityManagerFactory("gathergrid_unit");
