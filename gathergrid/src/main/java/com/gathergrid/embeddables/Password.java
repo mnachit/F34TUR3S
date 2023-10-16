@@ -5,7 +5,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import jakarta.persistence.Embeddable;
 
-
 @Embeddable
 public class Password {
 
