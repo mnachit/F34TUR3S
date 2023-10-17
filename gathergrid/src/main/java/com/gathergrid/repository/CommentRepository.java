@@ -5,50 +5,45 @@ import com.gathergrid.entities.Response;
 import com.gathergrid.factory.DbEntityManagerFactory;
 import jakarta.persistence.EntityManager;
 
+import java.util.List;
+
 public class CommentRepository {
-    public Response save(Comment comment) {
+    public void save(Comment comment) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
         em.persist(comment);
         em.getTransaction().commit();
-        em.close();
-        return new Response("Comment Created ",comment,201);
     }
-    public Response update(Comment comment) {
+    public void update(Comment comment) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
+        em.getTransaction().begin();
         em.merge(comment);
         em.getTransaction().commit();
-        em.close();
-        return new Response("Comment Updated ",comment,200);
     }
-    public Response delete(Comment comment) {
+    public void delete(Comment comment) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
-        em.remove(comment);
+        em.getTransaction().begin();
+        em.remove(em.contains(comment) ? comment : em.merge(comment));
         em.getTransaction().commit();
-        em.close();
-        return new Response("Comment Deleted ",comment,200);
     }
-    public Response findById(Long id) {
+    public Comment findById(Long id) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
+        em.getTransaction().begin();
         Comment comment = em.find(Comment.class,id);
         em.getTransaction().commit();
-        em.close();
-        if (comment == null) return new Response("No Comment Found ",comment,404);
-        else return new Response("Comment Found ",comment,200);
+        return comment;
     }
-    public Response findAll() {
+    public List<Comment> findAll() {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
+        em.getTransaction().begin();
         java.util.List<Comment> comments = em.createQuery("select c from Comment c",Comment.class).getResultList();
         em.getTransaction().commit();
-        em.close();
-        if (comments.isEmpty()) return new Response("No Comments Found ",comments,404);
-        else return new Response("Comments Found ",comments,200);
+        return comments;
     }
-    public Response findAllByEvent(Long id) {
+    public List<Comment> findAllByEvent(Long id) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
+        em.getTransaction().begin();
         java.util.List<Comment> comments = em.createQuery("select c from Comment c where c.event.id = :id",Comment.class).setParameter("id",id).getResultList();
         em.getTransaction().commit();
-        em.close();
-        if(comments.isEmpty()) return new Response("No Comments Found ",comments,404);
-        else return new Response("Comments Found ",comments,200);
+        return comments;
     }
 }
