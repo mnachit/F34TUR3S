@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import java.util.List;
 @Setter @Getter
-public class Response<T> {
+public class Response {
     private String message;
     private Object data;
     private int status;
@@ -19,5 +19,14 @@ public class Response<T> {
     public Response(String message, int status) {
         this.message = message;
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Response{" +
+                "status=" + status +
+                ",message='" + message + '\'' +
+                ", data=" + data +
+                '}';
     }
 }

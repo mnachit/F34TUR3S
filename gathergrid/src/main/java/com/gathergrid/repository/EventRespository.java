@@ -34,7 +34,7 @@ public class EventRespository {
           em.close();
           return new Response("Event Deleted ",event,200);
     }
-    public Response<Event> findById(Long id) {
+    public Response findById(Long id) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
         em.getTransaction().begin();
         Event event = em.find(Event.class,id);

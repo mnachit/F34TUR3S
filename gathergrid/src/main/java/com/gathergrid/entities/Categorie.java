@@ -19,4 +19,13 @@ public class Categorie {
     }
     public Categorie() {
     }
+
+    @Override
+    public String toString() {
+        return "Categorie{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

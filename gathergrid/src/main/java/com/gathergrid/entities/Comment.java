@@ -28,4 +28,15 @@ public class Comment {
     }
     public Comment() {
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", user=" + user +
+                ", date=" + date +
+                '}';
+    }
+
 }

@@ -25,4 +25,13 @@ public class Ticket {
     }
     public Ticket() {
     }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + id +
+                ", date_of_reservation=" + date_of_reservation +
+                ", user=" + user +
+                '}';
+    }
 }

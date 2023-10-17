@@ -17,6 +17,7 @@ public class CategorieRepository {
     }
     public Response update(Categorie categorie) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
+        em.getTransaction().begin();
         em.merge(categorie);
         em.getTransaction().commit();
         em.close();
@@ -24,14 +25,15 @@ public class CategorieRepository {
     }
     public Response delete(Categorie categorie) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
-
-        em.remove(categorie);
+        em.getTransaction().begin();
+        em.remove(em.contains(categorie) ? categorie : em.merge(categorie));
         em.getTransaction().commit();
         em.close();
         return new Response("Categorie Deleted ",categorie,200);
     }
     public Response findById(Long id) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
+        em.getTransaction().begin();
         Categorie categorie = em.find(Categorie.class,id);
         em.getTransaction().commit();
         em.close();
@@ -40,6 +42,7 @@ public class CategorieRepository {
     }
     public Response findAll() {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
+        em.getTransaction().begin();
         java.util.List<Categorie> categories = em.createQuery("select c from Categorie c",Categorie.class).getResultList();
         em.getTransaction().commit();
         em.close();
