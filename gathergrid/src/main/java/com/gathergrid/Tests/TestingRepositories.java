@@ -67,7 +67,7 @@ public class TestingRepositories {
         User user = em.find(User.class,1L);
         em.getTransaction().commit();
         em.close();
-        Event event =(Event) eventRespository.findById(1L).getData();
+        Event event = eventRespository.findById(1L);
 
         Ticket ticket = new Ticket(new Date(2021,10,10),user,event);
         ticketRepository.save(ticket);

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: mnachit
@@ -22,6 +23,7 @@
             background: #f8f8f8
         }
     </style>
+    <jsp:include page="../util/taglibs.jsp" />
 </head>
 
 <body>
@@ -67,36 +69,39 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="align-middle">
-                                        <div
-                                                class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
-                                            <input type="checkbox" class="custom-control-input" id="item-1">
-                                            <label class="custom-control-label" for="item-1"></label>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        Adam Cotter
-                                    </td>
-                                    <td class="text-nowrap align-middle">09 Dec 2017</td>
-                                    <td class="text-nowrap align-middle"><span>sss</span></td>
-                                    <td class="text-center align-middle">
-                                        <div class="btn-group align-top">
-                                            hhhhhh
-                                        </div>
-                                    </td>
-                                    <td class="text-center align-middle">
-                                        <div class="btn-group align-top">
-                                            <h1>jjj</h1>
-                                        </div>
-                                    </td>
-                                    <td class="text-center align-middle">
-                                        <div class="btn-group align-top">
-                                            <button class="btn btn-sm btn-outline-secondary badge" type="button"
-                                                    data-toggle="modal" data-target="#user-form-modal">confirmation de réservation</button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <c:forEach items="${events}" var="event">
+                                    <tr>
+                                        <td class="align-middle">
+                                            <div
+                                                    class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
+                                                <input type="checkbox" class="custom-control-input" id="item-1">
+                                                <label class="custom-control-label" for="item-1"></label>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                                ${event.name}
+                                        </td>
+                                        <td class="text-nowrap align-middle">${event.date}</td>
+                                        <td class="text-nowrap align-middle"><span>${event.location}</span></td>
+                                        <td class="text-center align-middle">
+                                            <div class="btn-group align-top">
+                                                    ${event.category}
+                                            </div>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <div class="btn-group align-top">
+                                                <h1>${event.description}</h1>
+                                            </div>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <div class="btn-group align-top">
+                                                <button class="btn btn-sm btn-outline-secondary badge" type="button"
+                                                        data-toggle="modal" data-target="#user-form-modal">confirmation de réservation</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+
                                 </tbody>
                             </table>
                         </div>
