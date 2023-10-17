@@ -1,8 +1,8 @@
 package com.gathergrid.embeddables;
 
 import jakarta.persistence.Embeddable;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 
 @Embeddable
 public class AddressEmail {

@@ -10,12 +10,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(message = "Id Of User Cannot Be Null")
     private Long id;
 
     @Embedded
@@ -69,4 +71,13 @@ public class User {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+                " id='" + getId() + "'" +
+                ", name='" + getName() + "'" +
+                ", email='" + getEmail() + "'" +
+                ", password='" + getPassword() + "'" +
+                "}";
+    }
 }
