@@ -28,6 +28,8 @@
 
 <body>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<jsp:include page="../util/taglibs.jsp" />
+<main id="main" class="flexbox-col">
 <div class="container">
     <div class="row flex-lg-nowrap">
         <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
@@ -53,13 +55,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th class="align-top">
-                                        <div
-                                                class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0">
-                                            <input type="checkbox" class="custom-control-input" id="all-items">
-                                            <label class="custom-control-label" for="all-items"></label>
-                                        </div>
-                                    </th>
+
                                     <th>nom</th>
                                     <th class="max-width">date</th>
                                     <th class="sortable">lieu</th>
@@ -69,28 +65,22 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${events}" var="event">
+                                <c:forEach items="${events}" var="Event">
                                     <tr>
-                                        <td class="align-middle">
-                                            <div
-                                                    class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
-                                                <input type="checkbox" class="custom-control-input" id="item-1">
-                                                <label class="custom-control-label" for="item-1"></label>
-                                            </div>
-                                        </td>
+
                                         <td class="align-middle text-center">
-                                                ${event.name}
+                                                ${Event.name}
                                         </td>
-                                        <td class="text-nowrap align-middle">${event.date}</td>
-                                        <td class="text-nowrap align-middle"><span>${event.location}</span></td>
+                                        <td class="text-nowrap align-middle">${Event.date}</td>
+                                        <td class="text-nowrap align-middle"><span><c:out value="${ Event.location}"></c:out></span></td>
                                         <td class="text-center align-middle">
                                             <div class="btn-group align-top">
-                                                    ${event.category}
+                                                    ${Event.categorie.name}
                                             </div>
                                         </td>
                                         <td class="text-center align-middle">
                                             <div class="btn-group align-top">
-                                                <h1>${event.description}</h1>
+                                                ${Event.description}
                                             </div>
                                         </td>
                                         <td class="text-center align-middle">
@@ -163,6 +153,7 @@
 </div>
 </div>
 </div>
+</main>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">

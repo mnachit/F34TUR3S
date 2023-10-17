@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "home", urlPatterns = "/home")
+@WebServlet(name = "home", urlPatterns = "/")
 public class HomeServlet extends HttpServlet{
     EventServiceImp eventServiceImp ;
     public void init()
@@ -21,7 +21,7 @@ public class HomeServlet extends HttpServlet{
     }
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Response responsee = eventServiceImp.getEvents();
-        String jspPath = "/WEB-INF/event/home.jsp";
+        String jspPath = "/home.jsp";
         RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(jspPath);
         try {
             request.setAttribute("events",responsee.getData());

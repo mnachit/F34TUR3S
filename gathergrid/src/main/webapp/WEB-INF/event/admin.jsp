@@ -26,12 +26,8 @@
 
 <body>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container">
-    <div class="row flex-lg-nowrap">
-        <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
-        </div>
-    </div>
-</div>
+<jsp:include page="../util/taglibs.jsp" />
+<main id="main" class="flexbox-col">
 <div class="col">
     <div class="e-tabs mb-3 px-3">
         <ul class="nav nav-tabs">
@@ -254,6 +250,7 @@
 </div>
 </div>
 </div>
+</main>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
