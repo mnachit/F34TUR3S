@@ -10,34 +10,25 @@ import java.util.Currency;
 import java.util.List;
 
 @Entity
+@Setter@Getter
 public class Event {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    @Setter@Getter
     private Long id;
-    @Setter@Getter
     private String name;
-    @Setter@Getter
     private String description;
-    @Setter@Getter
     private String location;
-    @Setter@Getter
     private Date date;
-    @Setter@Getter
     private Time time;
     @ManyToOne
-    @Setter@Getter
     private Categorie categorie;
-    @Setter@Getter
-    private Currency vip_price;
-    @Setter@Getter
-    private Currency regular_price;
-    @Setter@Getter
-    private Currency basic_price;
-    @OneToMany(mappedBy = "event")
+    private int vip_price;
+    private int regular_price;
+    private int basic_price;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "event", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
-    public Event(String name, String description, String location, Date date, Time time, Categorie categorie, Currency vip_price, Currency regular_price, Currency basic_price, List<Comment> comments) {
+    public Event(String name, String description, String location, Date date, Time time, Categorie categorie, int vip_price, int regular_price, int basic_price, List<Comment> comments) {
         this.name = name;
         this.description = description;
         this.location = location;
@@ -50,7 +41,7 @@ public class Event {
         this.comments = comments;
     }
 
-    public Event(String name, String description, String location, Date date, Time time, Categorie categorie, Currency vip_price, Currency regular_price, Currency basic_price) {
+    public Event(String name, String description, String location, Date date, Time time, Categorie categorie, int vip_price, int regular_price, int basic_price) {
         this.name = name;
         this.description = description;
         this.location = location;
@@ -62,7 +53,7 @@ public class Event {
         this.basic_price = basic_price;
     }
 
-    public Event(String name, String description, String location, Date date, Time time, Currency vip_price, Currency regular_price, Currency basic_price) {
+    public Event(String name, String description, String location, Date date, Time time, int vip_price, int regular_price, int basic_price) {
         this.name = name;
         this.description = description;
         this.location = location;
@@ -74,5 +65,22 @@ public class Event {
     }
 
     public Event() {
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", location='" + location + '\'' +
+                ", date=" + date +
+                ", time=" + time +
+                ", categorie=" + categorie +
+                ", vip_price=" + vip_price +
+                ", regular_price=" + regular_price +
+                ", basic_price=" + basic_price +
+                ", comments=" + comments +
+                '}';
     }
 }

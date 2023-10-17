@@ -12,6 +12,7 @@ import java.util.List;
 public class EventRespository {
    public Response save(Event event) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
+        em.getTransaction().begin();
         em.persist(event);
         em.getTransaction().commit();
         em.close();
@@ -19,6 +20,7 @@ public class EventRespository {
    }
    public Response update(Event event) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
+        em.getTransaction().begin();
         em.merge(event);
         em.getTransaction().commit();
         em.close();
@@ -26,13 +28,15 @@ public class EventRespository {
    }
     public Response delete(Event event) {
           EntityManager em = DbEntityManagerFactory.getEntityManager();
+            em.getTransaction().begin();
           em.remove(event);
           em.getTransaction().commit();
           em.close();
           return new Response("Event Deleted ",event,200);
     }
-    public Response<Event> findById(Long id) {
+    public Response findById(Long id) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
+        em.getTransaction().begin();
         Event event = em.find(Event.class,id);
         em.getTransaction().commit();
         em.close();
@@ -41,6 +45,7 @@ public class EventRespository {
     }
     public Response findAll() {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
+        em.getTransaction().begin();
         List<Event> events = em.createQuery("select e from Event e",Event.class).getResultList();
         em.getTransaction().commit();
         em.close();
@@ -49,6 +54,7 @@ public class EventRespository {
     }
     public Response findAllByCategorie(Long id) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
+        em.getTransaction().begin();
         List<Event> events = em.createQuery("select e from Event e where e.categorie.id = :id",Event.class).setParameter("id",id).getResultList();
         em.getTransaction().commit();
         em.close();
@@ -57,6 +63,7 @@ public class EventRespository {
     }
     public Response searchEvents(String term){
         EntityManager em = DbEntityManagerFactory.getEntityManager();
+        em.getTransaction().begin();
         List<Event> events = em.createQuery("select e from Event e where e.name like :term or e.description like :term",Event.class).setParameter("term","%"+term+"%").getResultList();
         em.getTransaction().commit();
         em.close();

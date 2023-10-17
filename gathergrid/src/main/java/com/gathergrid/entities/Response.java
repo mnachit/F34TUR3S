@@ -4,13 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-
-public class Response<T> {
-    @Setter @Getter
+@Setter @Getter
+public class Response {
     private String message;
-    @Setter@Getter
     private Object data;
-    @Setter@Getter
     private int status;
 
     public Response(String message, Object data, int status) {
@@ -22,5 +19,14 @@ public class Response<T> {
     public Response(String message, int status) {
         this.message = message;
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Response{" +
+                "status=" + status +
+                ",message='" + message + '\'' +
+                ", data=" + data +
+                '}';
     }
 }

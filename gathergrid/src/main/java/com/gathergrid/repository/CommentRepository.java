@@ -27,7 +27,7 @@ public class CommentRepository {
         em.close();
         return new Response("Comment Deleted ",comment,200);
     }
-    public Response<Comment> findById(Long id) {
+    public Response findById(Long id) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
         Comment comment = em.find(Comment.class,id);
         em.getTransaction().commit();

@@ -9,23 +9,17 @@ import lombok.Setter;
 
 import java.sql.Date;
 @Entity
+@Setter@Getter
 public class Comment {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    @Setter @Getter
     private Long id;
-    @Setter@Getter
     private String text;
-
     @ManyToOne
-    @Setter@Getter
     private User user;
     @ManyToOne(fetch = jakarta.persistence.FetchType.LAZY)
-    @Getter@Setter
     private Event event;
-    @Setter@Getter
     private Date date;
-
     public Comment(String text, User user, Event event, Date date) {
         this.text = text;
         this.user = user;
@@ -34,4 +28,15 @@ public class Comment {
     }
     public Comment() {
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", user=" + user +
+                ", date=" + date +
+                '}';
+    }
+
 }
