@@ -1,11 +1,10 @@
 package com.gathergrid.exceptions.factories;
 
+import com.gathergrid.exceptions.costums.AlreadyExistsException;
 import com.gathergrid.exceptions.costums.ValidationException;
-import com.gathergrid.exceptions.handlers.EntityExistsExceptionHandler;
+import com.gathergrid.exceptions.handlers.AlreadyExistsExceptionHandler;
 import com.gathergrid.exceptions.handlers.ValidationExceptionHandler;
 import com.gathergrid.exceptions.implementation.ExceptionHandler;
-
-import jakarta.persistence.EntityExistsException;
 
 public class ExceptionHandlerFactory {
 
@@ -15,8 +14,8 @@ public class ExceptionHandlerFactory {
             return new ValidationExceptionHandler();
         }
 
-        if (exception instanceof EntityExistsException) {
-            return new EntityExistsExceptionHandler();
+        if (exception instanceof AlreadyExistsException) {
+            return new AlreadyExistsExceptionHandler();
         }
 
         return null;
