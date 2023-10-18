@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/register")
+@WebServlet(name = "signUpServlet", urlPatterns = "/signUpServlet")
 public class signUp extends HttpServlet {
 
     private UserService userService;
@@ -42,7 +42,7 @@ public class signUp extends HttpServlet {
 
             userService.registerUser(user);
 
-            response.sendRedirect("successRegistration.jsp");
+            request.setAttribute("successCreationAccount", true);
 
         } catch (Exception e) {
 
@@ -50,10 +50,10 @@ public class signUp extends HttpServlet {
 
             exceptionHandler.handleException(e, request);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/failedRegistration.jsp");
-
-            dispatcher.forward(request, response);
-
         }
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/authentification");
+
+        dispatcher.forward(request, response);
     }
 }
