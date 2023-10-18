@@ -1,7 +1,7 @@
-package com.gathergrid.servlet.registration;
+package com.gathergrid.servlet.authentification;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 
 import com.gathergrid.entities.User;
 import com.gathergrid.exceptions.factories.ExceptionHandlerFactory;
@@ -15,8 +15,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "signInServlet", urlPatterns = "/signInServlet")
-public class signIn extends HttpServlet {
+@WebServlet(name = "signUpServlet", urlPatterns = "/signUpServlet")
+public class signUp extends HttpServlet {
 
     private UserService userService;
 
@@ -30,16 +30,19 @@ public class signIn extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String userName = request.getParameter("userName");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        User user = new User(null, null, null, email, password);
+        User user = new User(firstName, lastName, userName, email, password);
 
         try {
 
-            userService.loginUser(user);
+            userService.registerUser(user);
 
-            request.setAttribute("successLoggingAccount", true);
+            request.setAttribute("successCreationAccount", true);
 
         } catch (Exception e) {
 

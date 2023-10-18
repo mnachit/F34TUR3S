@@ -1,4 +1,4 @@
-package com.gathergrid.servlet.registration;
+package com.gathergrid.servlet.authentification;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;

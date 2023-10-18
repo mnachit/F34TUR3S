@@ -8,6 +8,8 @@ import com.gathergrid.exceptions.costums.ValidationException;
 import com.gathergrid.helpers.user.UserValidationHelper;
 import com.gathergrid.repository.UserRepository;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -16,16 +18,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class UserService {
+public class UserService extends UserValidationHelper {
 
-    private UserRepository userRepository;
-    private UserValidationHelper UH;
     private Validator validator;
 
     public UserService() {
-        this.userRepository = new UserRepository();
+        super(new UserRepository());
         this.validator = Validation.buildDefaultValidatorFactory().getValidator();
-        this.UH = new UserValidationHelper(userRepository);
     }
 
     public void registerUser(User user) {
@@ -40,28 +39,30 @@ public class UserService {
             throw new ValidationException(errors);
         }
 
-        if (UH.emailAlreadyExists(user.getEmail().getAddressEmail())) {
+        if (emailAlreadyExists(user.getEmail().getAddressEmail())) {
             throw new AlreadyExistsException("Email is already exists");
         }
 
-        if (UH.userNameAlreadyExists(user.getName().getUserName())) {
+        if (userNameAlreadyExists(user.getName().getUserName())) {
             throw new AlreadyExistsException("Username is already exists");
         }
 
-        userRepository.save(user);
+        addAccount(user);
     }
 
-    public void loginUser(User givedUser) {
+    public void loginUser(User givedUser, HttpServletRequest request) {
 
-        if (UH.noUserHasThisEmail(givedUser.getEmail().getAddressEmail())) {
+        if (noUserHasThisEmail(givedUser.getEmail().getAddressEmail())) {
             throw new DoNotExistsException("This Email Do Not Exist");
         }
 
-        User fetchedUser = UH.getUserByEmail(givedUser.getEmail().getAddressEmail());
+        User fetchedUser = getUserByEmail(givedUser.getEmail().getAddressEmail());
 
-        if (UH.passwordsAreNotMatched(givedUser, fetchedUser)) {
+        if (passwordsAreNotMatched(givedUser, fetchedUser)) {
             throw new NotMatchedException("Password Is Incorrect");
         }
+
+        storeLoggedUserInSession(fetchedUser, request);
 
     }
 
