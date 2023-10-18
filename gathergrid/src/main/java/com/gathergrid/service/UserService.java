@@ -34,7 +34,7 @@ public class UserService {
 
             throw new ValidationException(errors);
         }
-        
+
         if (userRepository.existsByEmail(user.getEmail().getAddressEmail())) {
             throw new AlreadyExistsException("Email is already exists");
         }
@@ -43,7 +43,7 @@ public class UserService {
             throw new AlreadyExistsException("Username is already exists");
         }
 
-        userRepository.saveUser(user);
+        userRepository.save(user);
     }
 
 }

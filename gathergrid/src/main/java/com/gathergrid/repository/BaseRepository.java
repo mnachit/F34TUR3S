@@ -1,13 +1,32 @@
 package com.gathergrid.repository;
 
+import com.gathergrid.factory.DbEntityManagerFactory;
+
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
+public abstract class BaseRepository<E> {
 
-public class BaseRepository {
+    private EntityManager entityManager;
+    private EntityTransaction transaction;
 
-    public static boolean existsByField(EntityManager entityManager, Class<?> entityClass, String fieldName,
-            Object value) {
+    protected BaseRepository() {
+        entityManager = DbEntityManagerFactory.getEntityManager();
+        transaction = entityManager.getTransaction();
+    }
+
+    public void save(E entity) {
+
+        transaction.begin();
+
+        entityManager.persist(entity);
+
+        transaction.commit();
+
+    }
+
+    protected boolean existsByField(Class<?> entityClass, String fieldName, Object value) {
 
         String jpql = "SELECT COUNT(e) FROM " + entityClass.getSimpleName() + " e WHERE e." + fieldName + " = :value";
 
