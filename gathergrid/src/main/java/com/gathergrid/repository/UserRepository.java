@@ -1,5 +1,6 @@
 package com.gathergrid.repository;
 
+import com.gathergrid.embeddables.AddressEmail;
 import com.gathergrid.entities.User;
 import com.gathergrid.factory.DbEntityManagerFactory;
 
@@ -7,6 +8,7 @@ import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
+import jakarta.validation.constraints.Email;
 
 public class UserRepository {
 
@@ -30,12 +32,11 @@ public class UserRepository {
 
     }
 
-    public boolean existsByEmail(String email) {
-        return BaseRepository.existsByField(entityManager, getClass(), "email", email);
+    public boolean existsByEmail(AddressEmail email) {
+        return BaseRepository.existsByField(entityManager, getClass(), "email", email.getAddressEmail());
     }
 
     public boolean existsByUsername(String username) {
         return BaseRepository.existsByField(entityManager, getClass(), "userName", username);
-
     }
 }

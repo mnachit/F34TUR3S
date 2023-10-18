@@ -1,6 +1,7 @@
 package com.gathergrid.service;
 
 import com.gathergrid.entities.User;
+import com.gathergrid.exceptions.costums.AlreadyExistsException;
 import com.gathergrid.exceptions.costums.ValidationException;
 import com.gathergrid.repository.UserRepository;
 
@@ -34,6 +35,14 @@ public class UserService {
                     .collect(Collectors.toList());
 
             throw new ValidationException(errors);
+        }
+
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new AlreadyExistsException("Email is already exists");
+        }
+
+        if (userRepository.existsByUsername(user.getName().getUserName())) {
+            throw new AlreadyExistsException("Username is already exists");
         }
 
         userRepository.saveUser(user);
