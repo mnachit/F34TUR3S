@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -21,12 +22,15 @@ public class User {
     private Long id;
 
     @Embedded
+    @Valid
     private Name name;
 
     @Embedded
+    @Valid
     private AddressEmail email;
 
     @Embedded
+    @Valid
     private Password password;
 
     public User() {
