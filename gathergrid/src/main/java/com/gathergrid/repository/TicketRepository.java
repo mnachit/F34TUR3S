@@ -1,49 +1,51 @@
 package com.gathergrid.repository;
 
-import com.gathergrid.entities.Comment;
 import com.gathergrid.entities.Response;
+import com.gathergrid.entities.Ticket;
 import com.gathergrid.factory.DbEntityManagerFactory;
 import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
-public class CommentRepository {
-    public void save(Comment comment) {
-        EntityManager em = DbEntityManagerFactory.getEntityManager();
-        em.persist(comment);
-        em.getTransaction().commit();
-    }
-    public void update(Comment comment) {
+public class TicketRepository {
+    public void save(Ticket ticket) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
         em.getTransaction().begin();
-        em.merge(comment);
+        em.persist(ticket);
         em.getTransaction().commit();
     }
-    public void delete(Comment comment) {
+    public void update(Ticket ticket) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
         em.getTransaction().begin();
-        em.remove(em.contains(comment) ? comment : em.merge(comment));
+        em.merge(ticket);
         em.getTransaction().commit();
     }
-    public Comment findById(Long id) {
+    public void delete(Ticket ticket) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
         em.getTransaction().begin();
-        Comment comment = em.find(Comment.class,id);
+        em.remove(em.contains(ticket) ? ticket : em.merge(ticket));
         em.getTransaction().commit();
-        return comment;
     }
-    public List<Comment> findAll() {
+    public Ticket findById(Long id) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
         em.getTransaction().begin();
-        java.util.List<Comment> comments = em.createQuery("select c from Comment c",Comment.class).getResultList();
+        Ticket ticket = em.find(Ticket.class,id);
         em.getTransaction().commit();
-        return comments;
+        return ticket;
     }
-    public List<Comment> findAllByEvent(Long id) {
+    public List<Ticket> findAll() {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
         em.getTransaction().begin();
-        java.util.List<Comment> comments = em.createQuery("select c from Comment c where c.event.id = :id",Comment.class).setParameter("id",id).getResultList();
+        java.util.List<Ticket> tickets = em.createQuery("select t from Ticket t",Ticket.class).getResultList();
         em.getTransaction().commit();
-        return comments;
+        return tickets;
     }
+    public List<Ticket> findByEvent(Long id) {
+        EntityManager em = DbEntityManagerFactory.getEntityManager();
+        em.getTransaction().begin();
+        java.util.List<Ticket> tickets = em.createQuery("select t from Ticket t where t.event.id = :id",Ticket.class).setParameter("id",id).getResultList();
+        em.getTransaction().commit();
+        return tickets;
+    }
+
 }
