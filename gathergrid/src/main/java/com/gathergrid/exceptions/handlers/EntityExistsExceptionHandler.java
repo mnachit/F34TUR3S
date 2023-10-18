@@ -12,9 +12,6 @@ public class EntityExistsExceptionHandler implements ExceptionHandler {
 
         EntityExistsException entityExistsException = (EntityExistsException) exception;
 
-        // request.setAttribute("entityExistsMessage",
-        // entityExistsException.getMessage());
-
         request.setAttribute("errors", entityExistsException.getMessage());
 
     }

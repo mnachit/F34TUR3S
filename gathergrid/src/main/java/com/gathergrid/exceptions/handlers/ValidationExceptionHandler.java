@@ -12,10 +12,6 @@ public class ValidationExceptionHandler implements ExceptionHandler {
 
         ValidationException validationException = (ValidationException) exception;
 
-        // request.setAttribute("validationErrors", validationException.getErrors());
-
-        validationException.getErrors().forEach(error -> System.out.println(error));
-
         request.setAttribute("errors", validationException.getErrors());
 
     }

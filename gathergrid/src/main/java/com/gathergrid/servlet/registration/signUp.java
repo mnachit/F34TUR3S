@@ -37,21 +37,19 @@ public class signUp extends HttpServlet {
         String password = request.getParameter("password");
 
         User user = new User(firstName, lastName, userName, email, password);
+        System.out.println(user.toString());
 
         try {
 
             userService.registerUser(user);
+
             response.sendRedirect("successRegistration.jsp");
 
         } catch (Exception e) {
 
             ExceptionHandler exceptionHandler = ExceptionHandlerFactory.getExceptionHandler(e);
+
             exceptionHandler.handleException(e, request);
-
-            System.out.println("servlet");
-            List<String> errors = (List<String>) request.getAttribute("errors");
-
-            errors.forEach(error -> System.out.println(error));
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("/failedRegistration.jsp");
 

@@ -19,8 +19,6 @@ public class ExceptionHandlerFactory {
             return new EntityExistsExceptionHandler();
         }
 
-        System.out.println(exception.getClass().getName());
-
         return null;
     }
 }

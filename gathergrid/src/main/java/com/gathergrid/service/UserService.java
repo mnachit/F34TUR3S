@@ -28,26 +28,15 @@ public class UserService {
 
         Set<ConstraintViolation<User>> violations = validator.validate(user);
 
-        System.out.println(user.toString());
         if (!violations.isEmpty()) {
-
-            System.out.println("In Validation");
-
             List<String> errors = violations.stream()
                     .map(ConstraintViolation::getMessage)
                     .collect(Collectors.toList());
 
-            errors.forEach(error -> System.out.println(error));
-
             throw new ValidationException(errors);
         }
 
-        try {
-            userRepository.saveUser(user);
-        } catch (EntityExistsException e) {
-            throw new EntityExistsException();
-        }
-
+        userRepository.saveUser(user);
     }
 
 }

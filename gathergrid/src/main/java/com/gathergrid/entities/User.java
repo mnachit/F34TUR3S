@@ -17,7 +17,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(message = "Id Of User Cannot Be Null")
+    // @NotNull(message = "Id Of User Cannot Be Null")
     private Long id;
 
     @Embedded
