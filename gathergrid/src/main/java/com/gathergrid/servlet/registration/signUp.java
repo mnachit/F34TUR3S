@@ -37,7 +37,6 @@ public class signUp extends HttpServlet {
         String password = request.getParameter("password");
 
         User user = new User(firstName, lastName, userName, email, password);
-        System.out.println(user.toString());
 
         try {
 

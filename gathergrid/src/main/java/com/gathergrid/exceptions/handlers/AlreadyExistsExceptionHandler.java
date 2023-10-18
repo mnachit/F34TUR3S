@@ -1,7 +1,9 @@
 package com.gathergrid.exceptions.handlers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.gathergrid.exceptions.costums.AlreadyExistsException;
-import com.gathergrid.exceptions.costums.ValidationException;
 import com.gathergrid.exceptions.implementation.ExceptionHandler;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,7 +15,7 @@ public class AlreadyExistsExceptionHandler implements ExceptionHandler {
 
         AlreadyExistsException alreadyExistsExceptionHandler = (AlreadyExistsException) exception;
 
-        request.setAttribute("errors", alreadyExistsExceptionHandler.getError());
+        request.setAttribute("errors", List.of(alreadyExistsExceptionHandler.getError()));
 
     }
 

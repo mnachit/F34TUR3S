@@ -5,8 +5,6 @@ import com.gathergrid.exceptions.costums.AlreadyExistsException;
 import com.gathergrid.exceptions.costums.ValidationException;
 import com.gathergrid.repository.UserRepository;
 
-import jakarta.persistence.EntityExistsException;
-
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -36,8 +34,8 @@ public class UserService {
 
             throw new ValidationException(errors);
         }
-
-        if (userRepository.existsByEmail(user.getEmail())) {
+        
+        if (userRepository.existsByEmail(user.getEmail().getAddressEmail())) {
             throw new AlreadyExistsException("Email is already exists");
         }
 
