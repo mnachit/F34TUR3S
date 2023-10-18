@@ -38,6 +38,17 @@ public abstract class BaseRepository<E> {
         return query.getResultList();
     }
 
+    public E findBy(Class<E> entityClass, String fieldName, Object value) {
+
+        String jpql = "SELECT e FROM " + entityClass.getSimpleName() + " e WHERE e." + fieldName + " = :value";
+
+        TypedQuery<E> query = entityManager.createQuery(jpql, entityClass);
+
+        query.setParameter("value", value);
+
+        return query.getSingleResult();
+    }
+
     protected boolean existsByField(Class<E> entityClass, String fieldName, Object value) {
 
         String jpql = "SELECT COUNT(e) FROM " + entityClass.getSimpleName() + " e WHERE e." + fieldName + " = :value";

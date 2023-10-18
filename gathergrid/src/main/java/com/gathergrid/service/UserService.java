@@ -3,6 +3,7 @@ package com.gathergrid.service;
 import com.gathergrid.entities.User;
 import com.gathergrid.exceptions.costums.AlreadyExistsException;
 import com.gathergrid.exceptions.costums.DoNotExistsException;
+import com.gathergrid.exceptions.costums.NotMatchedException;
 import com.gathergrid.exceptions.costums.ValidationException;
 import com.gathergrid.repository.UserRepository;
 
@@ -47,13 +48,35 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void loginUser(User user) {
+    public void loginUser(User givedUser) {
 
-        if (!userRepository.existsByEmail(user.getEmail().getAddressEmail())) {
+        if (noUserHasThisEmail(givedUser.getEmail().getAddressEmail())) {
             throw new DoNotExistsException("This Email Do Not Exist");
         }
-        
 
+        User fetchedUser = getUserByEmail(givedUser.getEmail().getAddressEmail());
+
+        if (passwordsAreNotMatched(givedUser, fetchedUser)) {
+            throw new NotMatchedException("Password Is Incorrect");
+        }
+
+    }
+
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    public boolean noUserHasThisEmail(String email) {
+        return !userRepository.existsByEmail(email);
+    }
+
+    public boolean passwordsAreNotMatched(User givedUser, User fetchedUser) {
+
+        String givedPassword = givedUser.getPassword().getPassword();
+
+        String fetchedPassword = fetchedUser.getPassword().getPassword();
+
+        return !givedPassword.equals(fetchedPassword);
     }
 
 }
