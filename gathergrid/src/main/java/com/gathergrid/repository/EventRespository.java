@@ -37,10 +37,18 @@ public class EventRespository {
     }
     public List<Event> findAll() {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
-        em.getTransaction().begin();
         List<Event> events = em.createQuery("select e from Event e",Event.class).getResultList();
-        em.getTransaction().commit();
         return events;
+    }
+    public List<Event> findByPagination(int offset,int eventsPerPage) {
+        EntityManager em = DbEntityManagerFactory.getEntityManager();
+        List<Event> events = em.createQuery("select e from Event e",Event.class).setFirstResult(offset).setMaxResults(eventsPerPage).getResultList();
+        return events;
+    }
+    public Long findTotalEvents() {
+        EntityManager em = DbEntityManagerFactory.getEntityManager();
+        Long count = em.createQuery("select count(e) from Event e",Long.class).getSingleResult();
+        return count;
     }
     public List<Event> findAllByCategorie(Long id) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
@@ -49,11 +57,14 @@ public class EventRespository {
         em.getTransaction().commit();
         return events;
     }
-    public List<Event> searchEvents(String term){
+    public List<Event> searchEvents(int offset,int eventsPerPage,String term){
         EntityManager em = DbEntityManagerFactory.getEntityManager();
-        em.getTransaction().begin();
-        List<Event> events = em.createQuery("select e from Event e where e.name like :term or e.description like :term",Event.class).setParameter("term","%"+term+"%").getResultList();
-        em.getTransaction().commit();
+        List<Event> events = em.createQuery("select e from Event e where e.name like :term or e.description like :term or e.categorie.name like :term",Event.class).setParameter("term","%"+term+"%").setFirstResult(offset).setMaxResults(eventsPerPage).getResultList();
         return events;
+    }
+    public Long searchEventsCount(String term){
+        EntityManager em = DbEntityManagerFactory.getEntityManager();
+        Long count = em.createQuery("select count(e) from Event e where e.name like :term or e.description like :term or e.categorie.name like :term",Long.class).setParameter("term","%"+term+"%").getSingleResult();
+        return count;
     }
 }

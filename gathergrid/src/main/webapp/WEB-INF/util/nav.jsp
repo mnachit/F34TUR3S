@@ -443,7 +443,7 @@
 </style>
 
 
-<nav id="navbar" style="z-index: 1;color: #f0f2f5">
+<nav id="navbar" style="z-index: 10;color: #f0f2f5">
   <ul class="navbar-items flexbox-col">
     <li class="navbar-logo flexbox-left">
       <a class="navbar-item-inner flexbox">
@@ -454,7 +454,7 @@
       </a>
     </li>
     <li class="navbar-item flexbox-left">
-      <a class="navbar-item-inner flexbox-left">
+      <a class="navbar-item-inner flexbox-left" href="/gathergrid_war/">
         <div class="navbar-item-inner-icon-wrapper flexbox">
           <i class="bi bi-house-door-fill fs-1"></i>
         </div>

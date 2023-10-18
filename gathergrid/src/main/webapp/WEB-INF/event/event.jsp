@@ -28,7 +28,7 @@
 
 <body>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<jsp:include page="../util/taglibs.jsp" />
+<jsp:include page="../util/nav.jsp" />
 <main id="main" class="flexbox-col">
 <div class="container">
     <div class="row flex-lg-nowrap">
@@ -42,60 +42,14 @@
             <li class="nav-item"><a class="nav-link active" href="#">Evenements</a></li>
         </ul>
     </div>
-
     <div class="row flex-lg-nowrap">
         <div class="col mb-3">
             <div class="e-panel card">
                 <div class="card-body">
                     <div class="card-title">
-                        <h6 class="mr-2"><span>Evenements</span><small class="px-1">....</small></h6>
+                        <h6 class="mr-2"><span>Event : </span><small class="px-1">....</small></h6>
                     </div>
-                    <div class="e-table">
-                        <div class="table-responsive table-lg mt-3">
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr>
 
-                                    <th>nom</th>
-                                    <th class="max-width">date</th>
-                                    <th class="sortable">lieu</th>
-                                    <th>Catégorie</th>
-                                    <th>description</th>
-                                    <th>reserve</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${events}" var="Event">
-                                    <tr>
-
-                                        <td class="align-middle text-center">
-                                                ${Event.name}
-                                        </td>
-                                        <td class="text-nowrap align-middle">${Event.date}</td>
-                                        <td class="text-nowrap align-middle"><span><c:out value="${ Event.location}"></c:out></span></td>
-                                        <td class="text-center align-middle">
-                                            <div class="btn-group align-top">
-                                                    ${Event.categorie.name}
-                                            </div>
-                                        </td>
-                                        <td class="text-center align-middle">
-                                            <div class="btn-group align-top">
-                                                ${Event.description}
-                                            </div>
-                                        </td>
-                                        <td class="text-center align-middle">
-                                            <div class="btn-group align-top">
-                                                <button class="btn btn-sm btn-outline-secondary badge" type="button"
-                                                        data-toggle="modal" data-target="#user-form-modal">confirmation de réservation</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
