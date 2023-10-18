@@ -46,4 +46,14 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void loginUser(User user) {
+
+        if (userRepository.existsByEmail(user.getEmail().getAddressEmail())) {
+            throw new AlreadyExistsException("Email is already exists");
+        }
+
+        
+
+    }
+
 }

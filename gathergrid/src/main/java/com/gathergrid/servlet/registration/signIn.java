@@ -33,6 +33,24 @@ public class signIn extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        System.out.println("Login");
+        User user = new User(null, null, null, email, password);
+
+        try {
+
+            userService.loginUser(user);
+
+            request.setAttribute("successCreationAccount", true);
+
+        } catch (Exception e) {
+
+            ExceptionHandler exceptionHandler = ExceptionHandlerFactory.getExceptionHandler(e);
+
+            exceptionHandler.handleException(e, request);
+
+        }
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/authentification");
+
+        dispatcher.forward(request, response);
     }
 }
