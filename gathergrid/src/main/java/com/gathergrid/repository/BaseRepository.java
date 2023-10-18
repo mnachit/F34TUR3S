@@ -1,5 +1,8 @@
 package com.gathergrid.repository;
 
+import java.util.List;
+
+import com.gathergrid.entities.Ticket;
 import com.gathergrid.factory.DbEntityManagerFactory;
 
 import jakarta.persistence.EntityManager;
@@ -26,7 +29,16 @@ public abstract class BaseRepository<E> {
 
     }
 
-    protected boolean existsByField(Class<?> entityClass, String fieldName, Object value) {
+    public List<E> fetchAll(Class<E> entityClass) {
+
+        String jpql = "SELECT e FROM " + entityClass.getSimpleName() + " e";
+
+        TypedQuery<E> query = entityManager.createQuery(jpql, entityClass);
+
+        return query.getResultList();
+    }
+
+    protected boolean existsByField(Class<E> entityClass, String fieldName, Object value) {
 
         String jpql = "SELECT COUNT(e) FROM " + entityClass.getSimpleName() + " e WHERE e." + fieldName + " = :value";
 

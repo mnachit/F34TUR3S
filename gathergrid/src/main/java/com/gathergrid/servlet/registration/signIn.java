@@ -39,7 +39,7 @@ public class signIn extends HttpServlet {
 
             userService.loginUser(user);
 
-            request.setAttribute("successCreationAccount", true);
+            request.setAttribute("successLoggingAccount", true);
 
         } catch (Exception e) {
 

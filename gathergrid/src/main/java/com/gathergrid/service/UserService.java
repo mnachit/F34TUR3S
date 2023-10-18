@@ -2,6 +2,7 @@ package com.gathergrid.service;
 
 import com.gathergrid.entities.User;
 import com.gathergrid.exceptions.costums.AlreadyExistsException;
+import com.gathergrid.exceptions.costums.DoNotExistsException;
 import com.gathergrid.exceptions.costums.ValidationException;
 import com.gathergrid.repository.UserRepository;
 
@@ -48,10 +49,9 @@ public class UserService {
 
     public void loginUser(User user) {
 
-        if (userRepository.existsByEmail(user.getEmail().getAddressEmail())) {
-            throw new AlreadyExistsException("Email is already exists");
+        if (!userRepository.existsByEmail(user.getEmail().getAddressEmail())) {
+            throw new DoNotExistsException("This Email Do Not Exist");
         }
-
         
 
     }
