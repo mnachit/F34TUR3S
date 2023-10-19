@@ -23,90 +23,102 @@
             background: #f8f8f8
         }
     </style>
-    <jsp:include page="../util/taglibs.jsp" />
+    <jsp:include page="../util/taglibs.jsp"/>
 </head>
 
 <body>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<jsp:include page="../util/nav.jsp" />
+<jsp:include page="../util/nav.jsp"/>
 <main id="main" class="flexbox-col">
-<div class="container">
-    <div class="row flex-lg-nowrap">
-        <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
-        </div>
-    </div>
-</div>
-<div class="col">
-    <div class="e-tabs mb-3 px-3">
-        <ul class="nav nav-tabs">
-            <li class="nav-item"><a class="nav-link active" href="#">Evenements</a></li>
-        </ul>
-    </div>
-    <div class="row flex-lg-nowrap">
-        <div class="col mb-3">
-            <div class="e-panel card">
-                <div class="card-body">
-                    <div class="card-title">
-                        <h6 class="mr-2"><span>Event : </span><small class="px-1">....</small></h6>
-                    </div>
-
-                </div>
+    <div class="container">
+        <div class="row flex-lg-nowrap">
+            <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
             </div>
         </div>
     </div>
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-8 col-lg-6">
-            <div class="card shadow-0 border" style="background-color: #f0f2f5;">
-                <div class="card-body p-4">
-
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <p>Type your note, and hit enter to add it</p>
-
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row align-items-center">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
-                                         alt="avatar" width="25" height="25" />
-                                    <p class="small mb-0 ms-2" style="margin-left: 0.2cm;">Martha</p>
-                                </div>
-                            </div>
-                        </div>
+    <div class="col">
+        <div class="row flex-lg-nowrap">
+            <div class="col mb-3">
+                <div class="e-panel card">
+                    <div class="card-header text-center">
+                        <h6 class="mr-2 "><span class="text-success">Event : </span><small
+                                class="px-1 text-dark">${event.name}</small></h6>
                     </div>
-
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <p>Type your note, and hit enter to add it</p>
-
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row align-items-center">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
-                                         alt="avatar" width="25" height="25" />
-                                    <p class="small mb-0 ms-2" style="margin-left: 0.2cm;">Martha</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col" class="text-danger">Category</th>
+                                <th scope="col" class="text-danger">Date</th>
+                                <th scope="col" class="text-danger">Time</th>
+                                <th scope="col" class="text-danger">Location</th>
+                                <%--                                <th scope="col">Description</th>--%>
+                                <th scope="col" class="text-danger">Basic Price</th>
+                                <th scope="col" class="text-danger">Regular Price</th>
+                                <th scope="col" class="text-danger">Vip Price</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-primary"> ${event.categorie.name}</td>
+                                <td class="text-primary"> ${event.date}</td>
+                                <td class="text-primary"> ${event.time}</td>
+                                <td class="text-primary"> ${event.location}</td>
+                                <%--                                <td> ${event.description}</td>--%>
+                                <td class="text-primary"> ${event.basic_price}</td>
+                                <td class="text-primary"> ${event.regular_price}</td>
+                                <td class="text-primary"> ${event.vip_price}</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <p>Type your note, and hit enter to add it</p>
-
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row align-items-center">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
-                                         alt="avatar" width="25" height="25" />
-                                    <p class="small mb-0 ms-2" style="margin-left: 0.2cm;">Martha</p>
-                                </div>
-                            </div>
+                    <div class="description card">
+                        <div class="card-header">
+                            <h5 class="mb-0 h3 text-danger">Description</h5>
+                        </div>
+                        <div class="card-body text-primary">
+                            <p>${event.description}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="text-center mb-3">
+            <button type="button" class="btn btn-success">Get Ticket</button>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col">
+                <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+                    <c:forEach items="${event.comments}" var="comment">
+                        <div class="card-body p-2">
+                            <div class="card mb-2">
+                                <div class="card-body">
+                                    <p>${comment.text}</p>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex flex-row align-items-center">
+                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
+                                                 alt="avatar" width="25" height="25"/>
+                                            <p class="small mb-0 ms-2" style="margin-left: 0.2cm;">
+                                                    ${comment.user.name}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
+                    <form action="/submit_comment" method="post">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Add a comment" name="comment_text"
+                                   required>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-</div>
-</div>
+    </div>
+    </div>
 </main>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>

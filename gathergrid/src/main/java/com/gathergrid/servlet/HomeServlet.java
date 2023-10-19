@@ -28,10 +28,16 @@ public class HomeServlet extends HttpServlet {
         if (request.getParameter("page") != null) {
             pageNumber = Integer.parseInt(request.getParameter("page"));
         }
-        Response res = eventServiceImp.SearchEvents(pageNumber, request.getParameter("search"));
-        List<Object> data = (List<Object>) res.getData();
-        request.setAttribute("events", (List<Event>) data.get(0));
-        request.setAttribute("totalPages", data.get(1));
+        Response res = eventServiceImp.SearchEvents(pageNumber,request.getParameter("search"));
+        List<Event> events =  null;
+        Integer totalPages = 0;
+        if(res.getStatus() == 200){
+            List<Object> data = (List<Object>) res.getData();
+            events = (List<Event>) data.get(0);
+            totalPages = (Integer) data.get(1);
+        }
+        request.setAttribute("events",events);
+        request.setAttribute("totalPages",totalPages);
         request.setAttribute("pageNumber", pageNumber);
         RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/home.jsp");
         try {

@@ -376,13 +376,6 @@
     background-color: hsl(var(--primary));
   }
 
-  /* ===============
-      5. @keyframes
-     =============== */
-
-  /* ==============
-      @media rules
-     ============== */
 
   @media only screen and (max-width: 1660px) {
     :root {
@@ -454,7 +447,7 @@
       </a>
     </li>
     <li class="navbar-item flexbox-left">
-      <a class="navbar-item-inner flexbox-left" href="/gathergrid_war/">
+      <a class="navbar-item-inner flexbox-left" href="home">
         <div class="navbar-item-inner-icon-wrapper flexbox">
           <i class="bi bi-house-door-fill fs-1"></i>
         </div>
