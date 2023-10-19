@@ -8,6 +8,6 @@
       <title>Document</title>
    </head>
    <body>
-        Succeess page
+        Succeess Logging
    </body>
 </html>

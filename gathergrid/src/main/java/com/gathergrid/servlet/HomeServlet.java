@@ -16,21 +16,22 @@ import java.util.List;
 import java.util.Objects;
 
 @WebServlet(name = "home", urlPatterns = "/")
-public class HomeServlet extends HttpServlet{
-    EventServiceImp eventServiceImp ;
-    public void init()
-    {
+public class HomeServlet extends HttpServlet {
+    EventServiceImp eventServiceImp;
+
+    public void init() {
         eventServiceImp = new EventServiceImp(new EventRespository());
     }
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int pageNumber = 1;
         if (request.getParameter("page") != null) {
             pageNumber = Integer.parseInt(request.getParameter("page"));
         }
-        Response res = eventServiceImp.SearchEvents(pageNumber,request.getParameter("search"));
+        Response res = eventServiceImp.SearchEvents(pageNumber, request.getParameter("search"));
         List<Object> data = (List<Object>) res.getData();
-        request.setAttribute("events",(List<Event>) data.get(0));
-        request.setAttribute("totalPages",data.get(1));
+        request.setAttribute("events", (List<Event>) data.get(0));
+        request.setAttribute("totalPages", data.get(1));
         request.setAttribute("pageNumber", pageNumber);
         RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/home.jsp");
         try {

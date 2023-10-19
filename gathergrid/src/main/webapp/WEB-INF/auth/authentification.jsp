@@ -63,12 +63,12 @@
             <form action="signInServlet" method="post">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                    <input type="email" id="loginName" class="form-control" />
-                    <label class="form-label" for="loginName">Email or username</label>
+                    <input type="email" id="loginName" name="email" class="form-control" />
+                    <label class="form-label" for="loginName">Email</label>
                 </div>
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                    <input type="password" id="loginPassword" class="form-control" />
+                    <input type="password" id="loginPassword" class="form-control" name="password"/>
                     <label class="form-label" for="loginPassword">Password</label>
                 </div>
                 <!-- 2 column grid layout -->

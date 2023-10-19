@@ -1,5 +1,7 @@
 package com.gathergrid.service;
 
+import com.gathergrid.embeddables.AddressEmail;
+import com.gathergrid.embeddables.Password;
 import com.gathergrid.entities.User;
 import com.gathergrid.exceptions.costums.AlreadyExistsException;
 import com.gathergrid.exceptions.costums.DoNotExistsException;
@@ -29,10 +31,10 @@ public class UserService extends UserValidationHelper {
 
     public void registerUser(User user) {
 
-        Set<ConstraintViolation<User>> violations = validator.validate(user);
+        Set<ConstraintViolation<User>> validationViolations = validator.validate(user);
 
-        if (!violations.isEmpty()) {
-            List<String> errors = violations.stream()
+        if (!validationViolations.isEmpty()) {
+            List<String> errors = validationViolations.stream()
                     .map(ConstraintViolation::getMessage)
                     .collect(Collectors.toList());
 
@@ -51,6 +53,26 @@ public class UserService extends UserValidationHelper {
     }
 
     public void loginUser(User givedUser, HttpServletRequest request) {
+
+        Set<ConstraintViolation<AddressEmail>> emailViolations = validator.validate(givedUser.getEmail());
+
+        if (!emailViolations.isEmpty()) {
+            List<String> errors = emailViolations.stream()
+                    .map(ConstraintViolation::getMessage)
+                    .collect(Collectors.toList());
+
+            throw new ValidationException(errors);
+        }
+
+        Set<ConstraintViolation<Password>> passwordViolations = validator.validate(givedUser.getPassword());
+
+        if (!passwordViolations.isEmpty()) {
+            List<String> errors = passwordViolations.stream()
+                    .map(ConstraintViolation::getMessage)
+                    .collect(Collectors.toList());
+
+            throw new ValidationException(errors);
+        }
 
         if (noUserHasThisEmail(givedUser.getEmail().getAddressEmail())) {
             throw new DoNotExistsException("This Email Do Not Exist");
