@@ -37,70 +37,52 @@
     </div>
 </div>
 <div class="col">
-    <div class="e-tabs mb-3 px-3">
-        <ul class="nav nav-tabs">
-            <li class="nav-item"><a class="nav-link active" href="#">Evenements</a></li>
-        </ul>
-    </div>
     <div class="row flex-lg-nowrap">
         <div class="col mb-3">
             <div class="e-panel card">
+                <div class="card-header">
+                    <h6 class="mr-2"><span>Event : </span><small class="px-1">${event.name}</small></h6>
+                </div>
                 <div class="card-body">
-                    <div class="card-title">
-                        <h6 class="mr-2"><span>Event : </span><small class="px-1">....</small></h6>
-                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <p><strong>Category:</strong> ${event.categorie.name}</p>
+                            <p><strong>Date:</strong> ${event.date}</p>
+                            <p><strong>Time:</strong> ${event.time}</p>
+                            <p><strong>Location:</strong> ${event.location}</p>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><strong>Basic Price:</strong> ${event.basic_price}</p>
+                            <p><strong>Regular Price:</strong> ${event.regular_price}</p>
+                            <p><strong>Vip Price:</strong> ${event.vip_price}</p>
+                            <p><strong>Vip Price:</strong> ${event.vip_price}</p>
 
+                        </div>
+                    </div>
+                    <p><strong>Description:</strong> ${event.description}</p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-left">
         <div class="col-md-8 col-lg-6">
             <div class="card shadow-0 border" style="background-color: #f0f2f5;">
-                <div class="card-body p-4">
-
-                    <div class="card mb-4">
+                <c:forEach items="${event.comments}" var="comment">
+                <div class="card-body p-2">
+                    <div class="card mb-2">
                         <div class="card-body">
-                            <p>Type your note, and hit enter to add it</p>
-
+                            <p>${comment.text}</p>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex flex-row align-items-center">
                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
                                          alt="avatar" width="25" height="25" />
-                                    <p class="small mb-0 ms-2" style="margin-left: 0.2cm;">Martha</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <p>Type your note, and hit enter to add it</p>
-
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row align-items-center">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
-                                         alt="avatar" width="25" height="25" />
-                                    <p class="small mb-0 ms-2" style="margin-left: 0.2cm;">Martha</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <p>Type your note, and hit enter to add it</p>
-
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-row align-items-center">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
-                                         alt="avatar" width="25" height="25" />
-                                    <p class="small mb-0 ms-2" style="margin-left: 0.2cm;">Martha</p>
+                                    <p class="small mb-0 ms-2" style="margin-left: 0.2cm;">${comment.user.name}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                </c:forEach>
             </div>
         </div>
     </div>

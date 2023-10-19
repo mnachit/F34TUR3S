@@ -25,7 +25,12 @@ public class EventServiceImp implements EventService {
     }
     @Override
     public  Response getEvent(Long id) {
-        return null;
+        Event event = eventRespository.findById(id);
+        if(event == null){
+            return new Response("No Event Found",404);
+        }else{
+            return new Response("Event Found",event,200);
+        }
     }
     @Override
     public  Response SearchEvents(int page,String searchTerm) {

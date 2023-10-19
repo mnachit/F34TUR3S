@@ -64,10 +64,10 @@
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>nom</th>
-                                        <th class="max-width">date</th>
-                                        <th class="sortable">lieu</th>
-                                        <th>Catégorie</th>
+                                        <th>Name</th>
+                                        <th class="max-width">Date</th>
+                                        <th class="sortable">Location</th>
+                                        <th>Catégory</th>
                                         <th>Basic Price</th>
                                         <th>Regular Price</th>
                                         <th>Vip Price</th>
@@ -106,8 +106,9 @@
                                                 <div class="btn-group align-top">
                                                     <button class="btn btn-sm btn-outline-secondary badge" type="button"
                                                             data-toggle="modal" data-target="#user-form-modal">Get Ticket</button>
-                                                    <button class="btn btn-sm btn-outline-secondary badge" type="button"
-                                                            data-toggle="modal" data-target="#user-form-modal">View Event</button>
+                                                    <a href="event_detail?event=${event.id}" style="text-decoration: none" rli="${event.id}">
+                                                        <button class="btn btn-sm btn-outline-secondary badge" type="button">View Event</button>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>
