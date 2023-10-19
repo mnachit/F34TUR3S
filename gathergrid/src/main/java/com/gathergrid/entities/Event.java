@@ -22,32 +22,36 @@ public class Event {
     private Time time;
     @ManyToOne
     private Categorie categorie;
-    private int vip_price;
-    private int regular_price;
-    private int basic_price;
+    @ManyToOne
+    private User user;
+    private Integer vip_price;
+    private Integer regular_price;
+    private Integer basic_price;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "event", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
-    public Event(String name, String description, String location, Date date, Time time, Categorie categorie, int vip_price, int regular_price, int basic_price, List<Comment> comments) {
+    public Event(String name, String description, String location, Date date, Time time, Categorie categorie,User user, int vip_price, int regular_price, int basic_price, List<Comment> comments) {
         this.name = name;
         this.description = description;
         this.location = location;
         this.date = date;
         this.time = time;
         this.categorie = categorie;
+        this.user = user;
         this.vip_price = vip_price;
         this.regular_price = regular_price;
         this.basic_price = basic_price;
         this.comments = comments;
     }
 
-    public Event(String name, String description, String location, Date date, Time time, Categorie categorie, int vip_price, int regular_price, int basic_price) {
+    public Event(String name, String description, String location, Date date, Time time, Categorie categorie,User user, int vip_price, int regular_price, int basic_price) {
         this.name = name;
         this.description = description;
         this.location = location;
         this.date = date;
         this.time = time;
         this.categorie = categorie;
+        this.user = user;
         this.vip_price = vip_price;
         this.regular_price = regular_price;
         this.basic_price = basic_price;
@@ -77,6 +81,7 @@ public class Event {
                 ", date=" + date +
                 ", time=" + time +
                 ", categorie=" + categorie +
+                ", user=" + user +
                 ", vip_price=" + vip_price +
                 ", regular_price=" + regular_price +
                 ", basic_price=" + basic_price +
