@@ -16,12 +16,13 @@ import java.util.List;
 import java.util.Objects;
 
 @WebServlet(name = "home", urlPatterns = "/")
-public class HomeServlet extends HttpServlet{
-    EventServiceImp eventServiceImp ;
-    public void init()
-    {
+public class HomeServlet extends HttpServlet {
+    EventServiceImp eventServiceImp;
+
+    public void init() {
         eventServiceImp = new EventServiceImp(new EventRespository());
     }
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int pageNumber = 1;
         if (request.getParameter("page") != null) {
