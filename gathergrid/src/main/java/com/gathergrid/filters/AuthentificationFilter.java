@@ -1,6 +1,7 @@
 package com.gathergrid.filters;
 
 import java.io.IOException;
+import java.util.function.Predicate;
 
 import com.gathergrid.entities.User;
 
@@ -9,10 +10,12 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+@WebFilter("/*")
 public class AuthentificationFilter implements Filter {
 
     private HttpServletRequest httpRequest;
@@ -33,12 +36,8 @@ public class AuthentificationFilter implements Filter {
 
         User loggedUser = (User) httpSession.getAttribute("LoggedUser");
 
-        String requestURI = httpRequest.getRequestURI();
-
-        if (loggedUser == null && reachablePath()) {
-
-            String contextPath = httpRequest.getContextPath();
-            httpResponse.sendRedirect(contextPath + "/login.jsp");
+        if (noAccessToThisRoute.test(loggedUser)) {
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.jsp");
             return;
         }
 
@@ -46,7 +45,7 @@ public class AuthentificationFilter implements Filter {
 
     }
 
-    public boolean reachablePath() {
+    public boolean reachablePathWithoutLoggin() {
 
         String url = httpRequest.getRequestURL().toString();
 
@@ -55,8 +54,9 @@ public class AuthentificationFilter implements Filter {
                 return true;
             }
         }
-
         return false;
     }
+
+    Predicate<User> noAccessToThisRoute = loggedUser -> loggedUser == null && !reachablePathWithoutLoggin();
 
 }
