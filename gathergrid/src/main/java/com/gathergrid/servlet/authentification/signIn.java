@@ -29,6 +29,14 @@ public class signIn extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.sendRedirect(request.getContextPath() + "/authentification");
+
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -40,6 +48,7 @@ public class signIn extends HttpServlet {
         user.setPassword(new Password(password));
 
         RequestDispatcher dispatcher;
+
         try {
 
             userService.loginUser(user, request);
