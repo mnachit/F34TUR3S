@@ -1,9 +1,6 @@
 package com.gathergrid.service;
 
 import com.gathergrid.entities.User;
-import com.gathergrid.exceptions.costums.AlreadyExistsException;
-import com.gathergrid.exceptions.costums.DoNotExistsException;
-import com.gathergrid.exceptions.costums.NotMatchedException;
 import com.gathergrid.helpers.user.UserValidationHelper;
 import com.gathergrid.repository.UserRepository;
 

@@ -50,7 +50,7 @@ public class signIn extends HttpServlet {
 
             userService.loginUser(user, request);
 
-            response.sendRedirect(request.getContextPath() + "/?successLoggingAccount=true");
+            response.sendRedirect(request.getContextPath());
 
         } catch (Exception e) {
 
