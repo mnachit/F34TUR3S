@@ -10,7 +10,7 @@ public class UserRepository extends BaseRepository<User> {
         return findBy(User.class, "email.addressEmail", email);
     }
 
-    public User findById(Login id) {
+    public User findById(Long id) {
         return findBy(User.class, "id", id);
     }
 
