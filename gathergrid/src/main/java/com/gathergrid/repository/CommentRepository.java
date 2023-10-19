@@ -10,6 +10,7 @@ import java.util.List;
 public class CommentRepository {
     public void save(Comment comment) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
+        em.getTransaction().begin();
         em.persist(comment);
         em.getTransaction().commit();
     }
