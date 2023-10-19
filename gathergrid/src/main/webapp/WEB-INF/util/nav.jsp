@@ -455,7 +455,7 @@
       </a>
     </li>
     <li class="navbar-item flexbox-left">
-      <a class="navbar-item-inner flexbox-left">
+      <a class="navbar-item-inner flexbox-left" href="myEvents">
         <div class="navbar-item-inner-icon-wrapper flexbox">
           <i class="bi bi-card-heading"></i>
         </div>

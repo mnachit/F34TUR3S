@@ -6,6 +6,7 @@ import com.gathergrid.entities.Response;
 import com.gathergrid.entities.User;
 import com.gathergrid.repository.CategorieRepository;
 import com.gathergrid.repository.EventRespository;
+import com.gathergrid.repository.UserRepository;
 import com.gathergrid.service.EventService;
 
 import java.sql.Date;
@@ -16,13 +17,13 @@ import java.util.List;
 
 public class EventServiceImp implements EventService {
     private final CategorieRepository categorieRepository;
-    private final UserServiceImp userServiceImp;
+    private final UserRepository userRepository;
     public EventRespository eventRespository;
 
-    public EventServiceImp(EventRespository eventRespository) {
+    public EventServiceImp(EventRespository eventRespository, CategorieRepository categorieRepository, UserRepository userRepository) {
         this.eventRespository = eventRespository;
-        this.categorieRepository = new CategorieRepository();
-        this.userServiceImp = new UserServiceImp();
+        this.categorieRepository = categorieRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -67,18 +68,21 @@ public class EventServiceImp implements EventService {
         }
     }
 
+    @Override
     public Response searchMyEvents(int page, Long userId, String searchTerm) {
-//        User user = userServiceImp.getUser(userId);
+        User user = userRepository.findById(userId.toString());
+        System.out.println(user);
+
         int eventsPerPage = 1;
         int offset = (page - 1) * eventsPerPage;
         List<Event> events;
         Long totalEvents;
         if (searchTerm != null) {
             events = eventRespository.searchMyEvents(offset, eventsPerPage, searchTerm, user);
-            totalEvents = eventRespository.searchEventsCount(searchTerm);
+            totalEvents = eventRespository.searchMyEventsCount(searchTerm, user);
         } else {
-            events = eventRespository.findByPagination(offset, eventsPerPage);
-            totalEvents = eventRespository.findTotalEvents();
+            events = eventRespository.findByPagination(offset, eventsPerPage, user);
+            totalEvents = eventRespository.findTotalEvents(user);
         }
         Integer totalPages = (int) Math.ceil((double) totalEvents / eventsPerPage);
 
