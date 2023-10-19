@@ -47,15 +47,11 @@ public class signIn extends HttpServlet {
         user.setEmail(new AddressEmail(email));
         user.setPassword(new Password(password));
 
-        RequestDispatcher dispatcher;
-
         try {
 
             userService.loginUser(user, request);
 
-            request.setAttribute("successLoggingAccount", true);
-
-            dispatcher = request.getRequestDispatcher("successLogging.jsp");
+            response.sendRedirect(request.getContextPath() + "/?successLoggingAccount=true");
 
         } catch (Exception e) {
 
@@ -63,13 +59,11 @@ public class signIn extends HttpServlet {
 
             exceptionHandler.handleException(e, request);
 
-            dispatcher = request.getRequestDispatcher("/authentification");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/authentification");
+
+            dispatcher.forward(request, response);
 
         }
 
-        dispatcher.forward(request, response);
-
-        User loggedUser = (User) request.getSession().getAttribute("LoggedUser");
-        System.out.println(loggedUser.toString());
     }
 }
