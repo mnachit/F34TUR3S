@@ -41,6 +41,12 @@ public class User {
         this.password = new Password(password);
     }
 
+    public User(Name name, AddressEmail email, Password password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
     public Long getId() {
         return this.id;
     }

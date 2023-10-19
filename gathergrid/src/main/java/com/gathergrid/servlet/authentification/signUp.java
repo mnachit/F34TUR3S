@@ -10,12 +10,14 @@ import com.gathergrid.service.UserService;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.ServletSecurity;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "signUpServlet", urlPatterns = "/signUpServlet")
+@ServletSecurity
 public class signUp extends HttpServlet {
 
     private UserService userService;

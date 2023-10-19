@@ -17,34 +17,18 @@ public class UserService extends UserValidationHelper {
 
     public void registerUser(User user) {
 
-        validateObject(user);
-
-        if (emailAlreadyExists(user.getEmail().getAddressEmail())) {
-            throw new AlreadyExistsException("Email is already exists");
-        }
-
-        if (userNameAlreadyExists(user.getName().getUserName())) {
-            throw new AlreadyExistsException("Username is already exists");
-        }
+        validateUser(user);
 
         addAccount(user);
     }
 
     public void loginUser(User givenUser, HttpServletRequest request) {
 
-        validateObject(givenUser.getEmail());
-
-        if (noUserHasThisEmail(givenUser.getEmail().getAddressEmail())) {
-            throw new DoNotExistsException("This Email Do Not Exist");
-        }
-
-        validateObject(givenUser.getPassword());
+        validateEmail(givenUser.getEmail());
 
         User fetchedUser = getUserByEmail(givenUser.getEmail().getAddressEmail());
 
-        if (passwordsAreNotMatched(givenUser, fetchedUser)) {
-            throw new NotMatchedException("Password Is Incorrect");
-        }
+        validatePassword(givenUser, fetchedUser);
 
         storeLoggedUserInSession(fetchedUser, request);
 
