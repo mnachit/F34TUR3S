@@ -1,6 +1,8 @@
 package com.gathergrid.filters;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import com.gathergrid.entities.User;
@@ -19,11 +21,19 @@ import jakarta.servlet.http.HttpSession;
 public class AuthentificationFilter implements Filter {
 
     private HttpServletRequest httpRequest;
-
     private HttpServletResponse httpResponse;
 
-    private String[] reachablePathsWithoutAuthentification = { "/authentification", "/signUpServlet",
-            "/signInServlet" };
+    private List<String> reachablePathsWithoutAuthentication = Arrays.asList("/authentification", "/signUpServlet",
+            "/signInServlet");
+
+    Predicate<User> noAccessToThisRoute = loggedUser -> {
+
+        if (loggedUser != null && reachablePathWithoutLogging()) {
+            return true;
+        }
+
+        return loggedUser == null && !reachablePathWithoutLogging();
+    };
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -36,27 +46,24 @@ public class AuthentificationFilter implements Filter {
 
         User loggedUser = (User) httpSession.getAttribute("LoggedUser");
 
+        // This Consition Is For Not returning to anthetifications servlets if the user already Logged In
+        if (loggedUser != null && reachablePathWithoutLogging()) {
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/");
+            return;
+        }
+
+        // This Condition Is For Not Accesseding Other Pages Without Logging In
         if (noAccessToThisRoute.test(loggedUser)) {
-            httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.jsp");
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/authentification");
             return;
         }
 
         chain.doFilter(request, response);
-
     }
 
-    public boolean reachablePathWithoutLoggin() {
-
+    public boolean reachablePathWithoutLogging() {
         String url = httpRequest.getRequestURL().toString();
-
-        for (String path : reachablePathsWithoutAuthentification) {
-            if (url.contains(path)) {
-                return true;
-            }
-        }
-        return false;
+        return reachablePathsWithoutAuthentication.stream().anyMatch(url::contains);
     }
-
-    Predicate<User> noAccessToThisRoute = loggedUser -> loggedUser == null && !reachablePathWithoutLoggin();
 
 }
