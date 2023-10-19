@@ -16,10 +16,34 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet" />
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
+    <%@taglib prefix="d" uri="http://java.sun.com/jsp/jstl/fmt" %>
 </head>
 
 <body>
 <div class="container mt-4">
+
+    <c:choose>
+        <c:when test="${successCreationAccount}">
+                <div class="alert alert-success" role="alert">
+                    Account Created Successfully
+                </div>
+        </c:when>
+    </c:choose>
+
+    <div class="error-container" style="height: 200px; overflow-y: auto;">
+        <c:choose>
+            <c:when test="${not empty errors}">
+                <c:forEach var="error" items="${errors}">
+                    <div class="alert alert-danger" role="alert">
+                        ${error}
+                    </div>
+                </c:forEach>
+            </c:when>
+        </c:choose>
+    </div>
     <!-- Pills navs -->
     <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
         <li class="nav-item" role="presentation">
@@ -36,15 +60,15 @@
     <!-- Pills content -->
     <div class="tab-content">
         <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-            <form>
+            <form action="signInServlet" method="post">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                    <input type="email" id="loginName" class="form-control" />
-                    <label class="form-label" for="loginName">Email or username</label>
+                    <input type="email" id="loginName" name="email" class="form-control" />
+                    <label class="form-label" for="loginName">Email</label>
                 </div>
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                    <input type="password" id="loginPassword" class="form-control" />
+                    <input type="password" id="loginPassword" class="form-control" name="password"/>
                     <label class="form-label" for="loginPassword">Password</label>
                 </div>
                 <!-- 2 column grid layout -->
@@ -70,25 +94,29 @@
             </form>
         </div>
         <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-            <form>
+            <form method="post" action="signUpServlet">
                 <p class="text-center">or:</p>
                 <!-- Name input -->
                 <div class="form-outline mb-4">
-                    <input type="text" id="registerName" class="form-control" name="Firstname" />
-                    <label class="form-label" for "registerName">Firstname</label>
+                    <input type="text" id="registerFirstName" class="form-control" name="firstName" />
+                    <label class="form-label" for="registerFirstName">Firstname</label>
                 </div>
                 <div class="form-outline mb-4">
-                    <input type="text" id="registerLastname" class="form-control" name="Lastname" />
+                    <input type="text" id="registerLastName" class="form-control" name="lastName" />
+                    <label class="form-label" for="registerLastName">Lastname</label>
+                </div>
+                <div class="form-outline mb-4">
+                    <input type="text" id="registerLastname" class="form-control" name="userName" />
                     <label class="form-label" for="registerName">Lastname</label>
                 </div>
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                    <input type="email" id="registerEmail" class="form-control" name="Email" />
+                    <input type="text" id="registerEmail" class="form-control" name="email" />
                     <label class="form-label" for="registerEmail">Email</label>
                 </div>
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                    <input type="password" id="registerPassword" class="form-control" name="Password" />
+                    <input type="text" id="registerPassword" class="form-control" name="password" />
                     <label class="form-label" for="registerPassword">Password</label>
                 </div>
                 <!-- Submit button -->

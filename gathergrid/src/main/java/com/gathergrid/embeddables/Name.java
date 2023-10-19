@@ -1,8 +1,8 @@
 package com.gathergrid.embeddables;
 
 import jakarta.persistence.Embeddable;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 
 @Embeddable
 public class Name {
