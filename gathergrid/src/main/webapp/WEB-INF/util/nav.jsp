@@ -455,7 +455,7 @@
       </a>
     </li>
     <li class="navbar-item flexbox-left">
-      <a class="navbar-item-inner flexbox-left">
+      <a class="navbar-item-inner flexbox-left" href="My_Events">
         <div class="navbar-item-inner-icon-wrapper flexbox">
           <i class="bi bi-card-heading"></i>
         </div>
@@ -463,7 +463,7 @@
       </a>
     </li>
     <li class="navbar-item flexbox-left">
-      <a class="navbar-item-inner flexbox-left">
+      <a class="navbar-item-inner flexbox-left" href="Edit_Profile">
         <div class="navbar-item-inner-icon-wrapper flexbox">
           <i class="bi bi-person-fill"></i>
         </div>
