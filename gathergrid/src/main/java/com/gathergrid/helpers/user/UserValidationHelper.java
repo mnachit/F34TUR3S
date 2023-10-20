@@ -69,7 +69,11 @@ public class UserValidationHelper {
 
         validateObject(givenUser.getPassword());
 
-        if (passwordsAreNotMatched(givenUser, fetchedUser)) {
+        String givedPassword = givenUser.getPassword().getPassword();
+
+        String fetchedPassword = fetchedUser.getPassword().getPassword();
+
+        if (passwordsAreNotMatched(givedPassword, fetchedPassword)) {
             throw new NotMatchedException("Password Is Incorrect");
         }
     }
@@ -90,12 +94,7 @@ public class UserValidationHelper {
         return !userRepository.existsByEmail(email);
     }
 
-    protected boolean passwordsAreNotMatched(User givedUser, User fetchedUser) {
-
-        String givedPassword = givedUser.getPassword().getPassword();
-
-        String fetchedPassword = fetchedUser.getPassword().getPassword();
-
+    protected boolean passwordsAreNotMatched(String givedPassword, String fetchedPassword) {
         return !givedPassword.equals(fetchedPassword);
     }
 

@@ -60,7 +60,7 @@
     <!-- Pills content -->
     <div class="tab-content">
         <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-            <form action="signInServlet" method="post">
+            <form action="signIn" method="post">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
                     <input type="email" id="loginName" name="email" class="form-control" />
@@ -94,7 +94,7 @@
             </form>
         </div>
         <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-            <form method="post" action="signUpServlet">
+            <form method="post" action="signUp">
                 <p class="text-center">or:</p>
                 <!-- Name input -->
                 <div class="form-outline mb-4">

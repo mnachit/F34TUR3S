@@ -31,4 +31,8 @@ public class UserService extends UserValidationHelper {
 
     }
 
+    public void updateProfile(User user) {
+        
+    }
+
 }

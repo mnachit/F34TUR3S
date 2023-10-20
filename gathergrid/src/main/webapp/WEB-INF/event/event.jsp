@@ -65,9 +65,9 @@
                                 <td class="text-primary"> ${event.time}</td>
                                 <td class="text-primary"> ${event.location}</td>
                                 <%--                                <td> ${event.description}</td>--%>
-                                <td class="text-primary"> ${event.basic_price}</td>
-                                <td class="text-primary"> ${event.regular_price}</td>
-                                <td class="text-primary"> ${event.vip_price}</td>
+                                <td class="text-primary"> ${event.basic_price} $</td>
+                                <td class="text-primary"> ${event.regular_price} $</td>
+                                <td class="text-primary"> ${event.vip_price} $</td>
                             </tr>
                             </tbody>
                         </table>
@@ -99,17 +99,18 @@
                                             <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
                                                  alt="avatar" width="25" height="25"/>
                                             <p class="small mb-0 ms-2" style="margin-left: 0.2cm;">
-                                                    ${comment.user.name}</p>
+                                                    ${comment.user.name.firstName}   ${comment.user.name.lastName}  At ${comment.date} </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </c:forEach>
-                    <form action="/submit_comment" method="post">
+                    <form action="" method="post">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Add a comment" name="comment_text"
+                            <input type="text" class="form-control" placeholder="Add a comment" name="text"
                                    required>
+                            <input type="hidden" name="event_id" value="${event.id}">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>

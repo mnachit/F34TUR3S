@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-@WebServlet(name = "home", urlPatterns = "/")
+@WebServlet("/")
 public class HomeServlet extends HttpServlet {
     EventServiceImp eventServiceImp;
 
@@ -30,16 +30,16 @@ public class HomeServlet extends HttpServlet {
         if (request.getParameter("page") != null) {
             pageNumber = Integer.parseInt(request.getParameter("page"));
         }
-        Response res = eventServiceImp.SearchEvents(pageNumber,request.getParameter("search"));
-        List<Event> events =  null;
+        Response res = eventServiceImp.SearchEvents(pageNumber, request.getParameter("search"));
+        List<Event> events = null;
         Integer totalPages = 0;
-        if(res.getStatus() == 200){
+        if (res.getStatus() == 200) {
             List<Object> data = (List<Object>) res.getData();
             events = (List<Event>) data.get(0);
             totalPages = (Integer) data.get(1);
         }
-        request.setAttribute("events",events);
-        request.setAttribute("totalPages",totalPages);
+        request.setAttribute("events", events);
+        request.setAttribute("totalPages", totalPages);
         request.setAttribute("pageNumber", pageNumber);
         RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/home.jsp");
         try {

@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "signUpServlet", urlPatterns = "/signUpServlet")
+@WebServlet(name = "signUpServlet", urlPatterns = "/signUp")
 @ServletSecurity
 public class signUp extends HttpServlet {
 
