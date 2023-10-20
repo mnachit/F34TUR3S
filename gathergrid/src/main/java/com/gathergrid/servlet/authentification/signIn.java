@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "signInServlet", urlPatterns = "/signInServlet")
+@WebServlet(name = "signInServlet", urlPatterns = "/signIn")
 public class signIn extends HttpServlet {
 
     private UserService userService;

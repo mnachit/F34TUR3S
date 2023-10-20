@@ -23,8 +23,8 @@ public class AuthentificationFilter implements Filter {
     private HttpServletRequest httpRequest;
     private HttpServletResponse httpResponse;
 
-    private List<String> reachablePathsWithoutAuthentication = Arrays.asList("/authentification", "/signUpServlet",
-            "/signInServlet");
+    private List<String> reachablePathsWithoutAuthentication = Arrays.asList("/authentification", "/signUp",
+            "/signIn");
 
     Predicate<User> noAccessToThisRoute = loggedUser -> {
 
@@ -46,7 +46,8 @@ public class AuthentificationFilter implements Filter {
 
         User loggedUser = (User) httpSession.getAttribute("LoggedUser");
 
-        // This Consition Is For Not returning to anthetifications servlets if the user already Logged In
+        // This Condition Is For Not returning to anthetifications servlets if the user
+        // already Logged In
         if (loggedUser != null && reachablePathWithoutLogging()) {
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/");
             return;
