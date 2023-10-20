@@ -447,7 +447,7 @@
       </a>
     </li>
     <li class="navbar-item flexbox-left">
-      <a class="navbar-item-inner flexbox-left" href="home">
+      <a class="navbar-item-inner flexbox-left" href="<%= request.getContextPath() %>">
         <div class="navbar-item-inner-icon-wrapper flexbox">
           <i class="bi bi-house-door-fill fs-1"></i>
         </div>
