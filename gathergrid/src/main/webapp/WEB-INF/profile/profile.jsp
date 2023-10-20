@@ -22,25 +22,25 @@
         <!-- First Name -->
         <div class="form-group">
             <label for="firstName">First Name:</label>
-            <input type="text" class="form-control" id="firstName" name="firstName" value="<c:out value='${user.firstName}' />" required>
+            <input type="text" class="form-control" id="firstName" name="firstName" value="<c:out value='${user.name.firstName}' />" required>
         </div>
         
         <!-- Last Name -->
         <div class="form-group">
             <label for="lastName">Last Name:</label>
-            <input type="text" class="form-control" id="lastName" name="lastName" value="<c:out value='${user.lastName}' />" required>
+            <input type="text" class="form-control" id="lastName" name="lastName" value="<c:out value='${user.name.lastName}' />" required>
         </div>
         
         <!-- Username -->
         <div class="form-group">
             <label for="userName">Username:</label>
-            <input type="text" class="form-control" id="userName" name="userName" value="<c:out value='${user.userName}' />" required>
+            <input type="text" class="form-control" id="userName" name="userName" value="<c:out value='${user.name.userName}' />" required>
         </div>
         
         <!-- Email -->
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" name="email" value="<c:out value='${user.email}' />" required>
+            <input type="email" class="form-control" id="email" name="email" value="<c:out value='${user.email.addressEmail}' />" required>
         </div>
         
         <!-- Password (You should handle this securely in your backend) -->
