@@ -18,7 +18,7 @@
 <div class="container">
     <h2>Edit Profile</h2>
     
-    <form action="updateProfileServlet" method="post">
+    <form action="profile" method="post">
         <!-- First Name -->
         <div class="form-group">
             <label for="firstName">First Name:</label>
