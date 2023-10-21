@@ -23,7 +23,7 @@
 </head>
 
 <body>
-<div class="container mt-4">
+<div class="container p-5 " style="width: 60%;border: black solid 1px;border-radius: 3px" >
 
     <c:choose>
         <c:when test="${successCreationAccount}">
@@ -33,7 +33,7 @@
         </c:when>
     </c:choose>
 
-    <div class="error-container" style="height: 200px; overflow-y: auto;">
+    <div class="error-container" style="height: 100px; overflow-y: auto;">
         <c:choose>
             <c:when test="${not empty errors}">
                 <c:forEach var="error" items="${errors}">
@@ -45,7 +45,7 @@
         </c:choose>
     </div>
     <!-- Pills navs -->
-    <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+    <ul class="nav nav-pills nav-justified " id="ex1" role="tablist">
         <li class="nav-item" role="presentation">
             <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
                aria-controls="pills-login" aria-selected="true">Login</a>
@@ -98,16 +98,16 @@
                 <p class="text-center">or:</p>
                 <!-- Name input -->
                 <div class="form-outline mb-4">
-                    <input type="text" id="registerFirstName" class="form-control" name="firstName" />
-                    <label class="form-label" for="registerFirstName">Firstname</label>
+                    <input type="text"  class="form-control" name="firstName" />
+                    <label class="form-label" >Firstname</label>
                 </div>
                 <div class="form-outline mb-4">
-                    <input type="text" id="registerLastName" class="form-control" name="lastName" />
-                    <label class="form-label" for="registerLastName">Lastname</label>
+                    <input type="text"  class="form-control" name="lastName" />
+                    <label class="form-label" >Lastname</label>
                 </div>
                 <div class="form-outline mb-4">
-                    <input type="text" id="registerLastname" class="form-control" name="userName" />
-                    <label class="form-label" for="registerName">Lastname</label>
+                    <input type="text"  class="form-control" name="userName" />
+                    <label class="form-label" >Lastname</label>
                 </div>
                 <!-- Email input -->
                 <div class="form-outline mb-4">
