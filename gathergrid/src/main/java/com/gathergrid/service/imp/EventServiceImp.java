@@ -70,7 +70,7 @@ public class EventServiceImp implements EventService {
 
     @Override
     public Response searchMyEvents(int page, Long userId, String searchTerm) {
-        User user = userRepository.findById(userId.toString());
+        User user = userRepository.findById(userId);
         System.out.println(user);
 
         int eventsPerPage = 1;
@@ -94,7 +94,7 @@ public class EventServiceImp implements EventService {
     }
 
     @Override
-    public Response createEvent(String title, String description, String location, String date, String time, int vip_price, int regular_price, int basic_price, Long category, Long user) {
+    public Response createEvent(String title, String description, String location, String dateTime, int vip_price, int regular_price, int basic_price, Long category, Long user) {
         Categorie eventCategory = categorieRepository.findById(category);
         User defaultUser = new User();
 //        User user1 = userServiceImp.getUser(user);
@@ -106,8 +106,8 @@ public class EventServiceImp implements EventService {
         Date formattedDate;
         Time formattedTime;
         try {
-            formattedDate = (Date) new SimpleDateFormat("yyyy-MM-dd").parse(date);
-            formattedTime = (Time) new SimpleDateFormat("HH:mm:ss").parse(time);
+            formattedDate = (Date) new SimpleDateFormat("yyyy-MM-dd").parse(dateTime);
+            formattedTime = (Time) new SimpleDateFormat("HH:mm:ss").parse(dateTime);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

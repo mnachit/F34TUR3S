@@ -28,7 +28,6 @@ public class EventDetail extends HttpServlet {
     CommentServiceImp commentServiceImp;
     public void init() {
         eventServiceImp = new EventServiceImp(new EventRespository(), new CategorieRepository(), new UserRepository());
-        eventServiceImp = new EventServiceImp(new EventRespository());
         commentServiceImp = new CommentServiceImp(new EventRespository());
     }
 
