@@ -455,11 +455,19 @@
       </a>
     </li>
     <li class="navbar-item flexbox-left">
-      <a class="navbar-item-inner flexbox-left" href="My_Events">
+      <a class="navbar-item-inner flexbox-left" href="">
         <div class="navbar-item-inner-icon-wrapper flexbox">
           <i class="bi bi-card-heading"></i>
         </div>
         <span class="link-text">My Events</span>
+      </a>
+    </li>
+    <li class="navbar-item flexbox-left">
+      <a class="navbar-item-inner flexbox-left" href="My_reservations">
+        <div class="navbar-item-inner-icon-wrapper flexbox">
+          <i class="bi bi-card-heading"></i>
+        </div>
+        <span class="link-text">My reservations</span>
       </a>
     </li>
     <li class="navbar-item flexbox-left">

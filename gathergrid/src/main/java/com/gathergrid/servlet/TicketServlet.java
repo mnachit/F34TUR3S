@@ -58,7 +58,7 @@ public class TicketServlet extends HttpServlet {
                 createTicket.createTicket(eventId, userId);
             }
             response.getWriter().println("Ticket created successfully.");
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/event/My_Events.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/event/My_reservations.jsp");
             try {
                 dispatcher.forward(request, response);
             } catch (Exception e) {
