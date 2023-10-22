@@ -106,17 +106,17 @@
                     <label class="form-label" >Lastname</label>
                 </div>
                 <div class="form-outline mb-4">
-                    <input type="text"  class="form-control" name="userName" />
-                    <label class="form-label" >Lastname</label>
+                    <input type="text" id="registerUsername" class="form-control" name="userName" />
+                    <label class="form-label" for="registerUsername">Username</label>
                 </div>
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                    <input type="text" id="registerEmail" class="form-control" name="email" />
+                    <input type="email" id="registerEmail" class="form-control" name="email" />
                     <label class="form-label" for="registerEmail">Email</label>
                 </div>
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                    <input type="text" id="registerPassword" class="form-control" name="password" />
+                    <input type="password" id="registerPassword" class="form-control" name="password" />
                     <label class="form-label" for="registerPassword">Password</label>
                 </div>
                 <!-- Submit button -->

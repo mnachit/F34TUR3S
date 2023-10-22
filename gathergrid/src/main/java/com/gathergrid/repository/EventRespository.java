@@ -52,7 +52,7 @@ public class EventRespository {
 
     public List<Event> findByPagination(int offset, int eventsPerPage, User user) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
-        List<Event> events = em.createQuery("select e from Event e where e.user = :user", Event.class).setFirstResult(offset).setMaxResults(eventsPerPage).setParameter("user", user).getResultList();
+        List<Event> events = em.createQuery("select e from Event e where e.user = :user", Event.class).setParameter("user", user).setFirstResult(offset).setMaxResults(eventsPerPage).getResultList();
         return events;
     }
 

@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Currency;
 import java.util.List;
 
@@ -18,8 +20,8 @@ public class Event {
     private String name;
     private String description;
     private String location;
-    private Date date;
-    private Time time;
+    private LocalDate date;
+    private LocalTime time;
     @ManyToOne
     private Categorie categorie;
     @ManyToOne
@@ -30,7 +32,7 @@ public class Event {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "event", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
-    public Event(String name, String description, String location, Date date, Time time, Categorie categorie,User user, int vip_price, int regular_price, int basic_price, List<Comment> comments) {
+    public Event(String name, String description, String location, LocalDate date, LocalTime time, Categorie categorie,User user, Integer vip_price, Integer regular_price, Integer basic_price, List<Comment> comments) {
         this.name = name;
         this.description = description;
         this.location = location;
@@ -44,7 +46,7 @@ public class Event {
         this.comments = comments;
     }
 
-    public Event(String name, String description, String location, Date date, Time time, Categorie categorie,User user, int vip_price, int regular_price, int basic_price) {
+    public Event(String name, String description, String location, LocalDate date, LocalTime time, Categorie categorie,User user, int vip_price, int regular_price, int basic_price) {
         this.name = name;
         this.description = description;
         this.location = location;
@@ -57,7 +59,7 @@ public class Event {
         this.basic_price = basic_price;
     }
 
-    public Event(String name, String description, String location, Date date, Time time, int vip_price, int regular_price, int basic_price) {
+    public Event(String name, String description, String location, LocalDate date, LocalTime time, int vip_price, int regular_price, int basic_price) {
         this.name = name;
         this.description = description;
         this.location = location;

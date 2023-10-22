@@ -23,6 +23,25 @@
 <jsp:include page="../util/taglibs.jsp"/>
 <jsp:include page="../util/nav.jsp"/>
 <main id="main" class="flexbox-col">
+    <c:choose>
+        <%--@elvariable id="success" type="java.lang.String"--%>
+        <c:when test="${not empty success}">
+            <div class="alert alert-success" role="alert">
+                Account Created Successfully
+            </div>
+            <c:remove var="success" scope="session"/>
+        </c:when>
+
+        <%--@elvariable id="error" type="java.lang.String"--%>
+        <c:when test="${not empty error}">
+            <div class="error-container" style="height: 100px; overflow-y: auto;">
+                <div class="alert alert-danger" role="alert">
+                        ${error}
+                </div>
+            </div>
+            <c:remove var="error" scope="session"/>
+        </c:when>
+    </c:choose>
     <div class="col">
         <div class="row flex-lg-nowrap mt-5">
             <div class="col mb-3">
@@ -58,20 +77,24 @@
                                             <td class="text-nowrap align-middle"><span>${event.description}</span>
                                             </td>
                                             <td class="text-center align-middle"><span>${event.location}</span></td>
-                                            <td class="text-nowrap align-middle"><span>${event.date + event.time}</span>
+                                            <td class="text-nowrap align-middle">
+                                                <span>${event.date} ${event.time} </span>
                                             </td>
                                             <td class="text-center align-middle"><span>${event.categorie.name}</span>
                                             </td>
-                                            <td class="text-center align-middle"><span>${event.basicPrice}</span></td>
-                                            <td class="text-center align-middle"><span>${event.regularPrice}</span></td>
-                                            <td class="text-center align-middle"><span>${event.vipPrice}</span></td>
+                                            <td class="text-center align-middle"><span>${event.basic_price} $</span>
+                                            </td>
+                                            <td class="text-center align-middle"><span>${event.regular_price} $</span>
+                                            </td>
+                                            <td class="text-center align-middle"><span>${event.vip_price} $</span></td>
                                             <td class="text-center align-middle">
                                                 <div class="btn-group align-top">
-                                                    <button class="btn btn-sm btn-outline-secondary badge" type="button"
-                                                            data-toggle="modal" data-target="#user-form-modal">Edit
-                                                    </button>
-                                                    <button class="btn btn-sm btn-outline-secondary badge"
-                                                            type="button"><i class="fa fa-trash"></i></button>
+                                                    <form action="<c:url value=""/>" method="POST">
+                                                        <input type="hidden" name="_method" value="DELETE"/>
+                                                        <input type="hidden" name="delete_id" value="${event.id}"/>
+                                                        <button class="btn btn-sm btn-outline-secondary badge"
+                                                                type="submit"><i class="fa fa-trash"></i></button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>
@@ -80,6 +103,23 @@
                                 </table>
                             </div>
                         </div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li class="page-item <%--@elvariable id="pageNumber" type="int"--%>
+                                <c:if test="${pageNumber == 1}">disabled</c:if>">
+                                    <a class="page-link" href="?page=${pageNumber - 1}">&laquo;</a>
+                                </li>
+                                <%--@elvariable id="totalPages" type="int"--%>
+                                <c:forEach var="i" begin="1" end="${totalPages}">
+                                    <li class="page-item <c:if test="${pageNumber == i}">active</c:if>">
+                                        <a class="page-link" href="?page=${i}"><c:out value="${i}"/></a>
+                                    </li>
+                                </c:forEach>
+                                <li class="page-item <c:if test="${pageNumber == totalPages}">disabled</c:if>">
+                                    <a class="page-link" href="?page=${pageNumber + 1}">&raquo;</a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -93,10 +133,16 @@
                         </div>
                         <hr class="my-3">
                         <div>
-                            <div class="form-group">
-                                <label for="search">Search by Name:</label>
-                                <div><input id="search" class="form-control w-100" type="text" placeholder="Name"></div>
-                            </div>
+                            <form action="" method="get">
+                                <div class="input-group rounded">
+                                    <input type="search" class="form-control rounded" placeholder="Search"
+                                           aria-label="Search"
+                                           aria-describedby="search-addon" name="search"/>
+                                    <button type="submit" class="btn btn-black bg-black" style="margin-left: 10px"><i
+                                            class="bi bi-binoculars"></i></button>
+                                </div>
+                                </a></li>
+                            </form>
                         </div>
                         <hr class="my-3">
                     </div>
@@ -114,95 +160,105 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                            <form class="form" method="post">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="name">Name</label>
-                                                    <input class="form-control" type="text" name="name" id="name"
-                                                           placeholder="nom" required>
-                                                </div>
+                        <form class="form" method="post">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="name">Name</label>
+                                                <input class="form-control" type="text" name="name" id="name"
+                                                       placeholder="Name" required>
                                             </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="datetime">Date and Time</label>
-                                                    <input id="datetime" class="form-control" type="datetime-local"
-                                                           name="datetime" required>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="datetime">Date and Time</label>
+                                                <input id="datetime" class="form-control" type="datetime-local"
+                                                       name="datetime" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="location">Location</label>
+                                                <input id="location" name="location" class="form-control" type="text"
+                                                       placeholder="Location" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="basic_price">Basic Price</label>
+                                            <div class="input-group">
+                                                <input id="basic_price" name="basic_price" type="number" min="1"
+                                                       step="any"
+                                                       placeholder="0.00" class="form-control" required>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">$</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="location">Location</label>
-                                                    <input id="location" class="form-control" type="text"
-                                                           placeholder="Location" required>
+                                        <div class="col">
+                                            <label for="regular_price">Regular Price</label>
+                                            <div class="input-group">
+                                                <input id="regular_price" name="regular_price" type="number" min="1"
+                                                       placeholder="0.00" step="any" class="form-control" required>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">$</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <label for="basic_price">Basic Price</label>
-                                                <div class="input-group">
-                                                    <input id="basic_price" type="number" min="1" step="any"
-                                                          placeholder="0.00" class="form-control" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">$</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <label for="regular_price">Regular Price</label>
-                                                <div class="input-group">
-                                                    <input id="regular_price" name="regular_price" type="number" min="1"
-                                                          placeholder="0.00" step="any" class="form-control" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">$</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <label for="vip_price">VIP Price</label>
-                                                <div class="input-group">
-                                                    <input id="vip_price" name="vip_price" type="number" min="1"
-                                                          placeholder="0.00" step="any" class="form-control" required>
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text">$</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="category">Category</label>
-                                                    <select name="category" id="category" class="form-control" required>
-                                                        <option value="1">Catégorie 1</option>
-                                                        <option value="2">Catégorie 2</option>
-                                                        <option value="3">Catégorie 3</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col mb-3">
-                                                <div class="form-group">
-                                                    <label for="description">Description</label>
-                                                    <textarea id="description" class="form-control" rows="5" name="description"
-                                                              placeholder="Description" required required></textarea>
+                                        <div class="col">
+                                            <label for="vip_price">VIP Price</label>
+                                            <div class="input-group">
+                                                <input id="vip_price" name="vip_price" type="number" min="1"
+                                                       placeholder="0.00" step="any" class="form-control" required>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">$</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col d-flex justify-content-end">
-                                        <button class="btn btn-primary" type="submit">Save Changes</button>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="category">Category</label>
+                                                <select name="category" id="category" class="form-control" required>
+                                                    <c:choose>
+                                                        <%--@elvariable id="categories" type="java.util.List"--%>
+                                                        <c:when test="${not empty categories}">
+                                                            <c:forEach items="${categories}" var="category">
+                                                                <option value="${category.id}">${category.name}</option>
+                                                            </c:forEach>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="">No categories</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col mb-3">
+                                            <div class="form-group">
+                                                <label for="description">Description</label>
+                                                <textarea id="description" class="form-control" rows="5"
+                                                          name="description"
+                                                          placeholder="Description" required></textarea>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
+                            <div class="row">
+                                <div class="col d-flex justify-content-end">
+                                    <button class="btn btn-primary" type="submit">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
