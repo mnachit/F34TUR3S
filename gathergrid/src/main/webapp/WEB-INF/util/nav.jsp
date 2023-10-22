@@ -320,7 +320,7 @@
     width: calc(5rem - 1em - 8px);
     position: relative;
   }
-  .navbar-item-inner-icon-wrapper ion-icon {
+  .navbar-item-inner-icon-wrapper .ion-icon {
     position: absolute;
     font-size: calc(var(--navbar-buttons) - 1rem);
   }
@@ -455,7 +455,7 @@
       </a>
     </li>
     <li class="navbar-item flexbox-left">
-      <a class="navbar-item-inner flexbox-left" href="">
+      <a class="navbar-item-inner flexbox-left" href="myEvents">
         <div class="navbar-item-inner-icon-wrapper flexbox">
           <i class="bi bi-card-heading"></i>
         </div>

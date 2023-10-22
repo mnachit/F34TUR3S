@@ -2,7 +2,6 @@ package com.gathergrid.repository;
 
 import java.util.List;
 
-import com.gathergrid.entities.Ticket;
 import com.gathergrid.factory.DbEntityManagerFactory;
 
 import jakarta.persistence.EntityManager;
@@ -11,8 +10,8 @@ import jakarta.persistence.TypedQuery;
 
 public abstract class BaseRepository<E> {
 
-    private EntityManager entityManager;
-    private EntityTransaction transaction;
+    private final EntityManager entityManager;
+    private final EntityTransaction transaction;
 
     protected BaseRepository() {
         entityManager = DbEntityManagerFactory.getEntityManager();

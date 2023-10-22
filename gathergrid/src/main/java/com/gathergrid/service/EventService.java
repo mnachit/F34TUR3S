@@ -1,13 +1,18 @@
 package com.gathergrid.service;
 
-import com.gathergrid.entities.Event;
 import com.gathergrid.entities.Response;
-
-import java.util.List;
 
 public interface EventService {
 
-    public  Response getEvents();
-    public  Response getEvent(Long id);
-    public  Response SearchEvents(int page,String searchTerm);
+    Response getEvents();
+
+    Response getEvent(Long id);
+
+    Response SearchEvents(int page, String searchTerm);
+
+    Response searchMyEvents(int page, Long userId, String searchTerm);
+
+    Response createEvent(String title, String description, String location, String dateTime, int vip_price, int regular_price, int basic_price, Long category, Long user);
+
+    Response deleteEvent(Long id, Long userId);
 }

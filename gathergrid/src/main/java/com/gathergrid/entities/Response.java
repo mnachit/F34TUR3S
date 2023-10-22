@@ -3,8 +3,8 @@ package com.gathergrid.entities;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-@Setter @Getter
+@Setter
+@Getter
 public class Response {
     private String message;
     private Object data;

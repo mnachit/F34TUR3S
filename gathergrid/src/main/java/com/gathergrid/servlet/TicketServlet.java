@@ -1,8 +1,5 @@
 package com.gathergrid.servlet;
 
-import com.gathergrid.entities.Event;
-import com.gathergrid.entities.User;
-import com.gathergrid.repository.UserRepository;
 import com.gathergrid.service.imp.TicketServiceImp;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,11 +9,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import com.gathergrid.repository.TicketRepository;
 import com.gathergrid.repository.EventRespository;
 import com.gathergrid.repository.UserRepository;
-import com.gathergrid.entities.Ticket;
 
-import java.awt.*;
 import java.io.IOException;
-import java.sql.Date;
+
 @WebServlet("/submitTicket/*")
 public class TicketServlet extends HttpServlet {
 

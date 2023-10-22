@@ -1,6 +1,5 @@
 package com.gathergrid.repository;
 
-import com.gathergrid.entities.Response;
 import com.gathergrid.entities.Ticket;
 import com.gathergrid.factory.DbEntityManagerFactory;
 import jakarta.persistence.EntityManager;

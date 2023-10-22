@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,11 +9,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
     <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet"/>
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
 
@@ -23,13 +23,13 @@
 </head>
 
 <body>
-<div class="container p-5 " style="width: 60%;border: black solid 1px;border-radius: 3px" >
+<div class="container p-5 " style="width: 60%;border: black solid 1px;border-radius: 3px">
 
     <c:choose>
         <c:when test="${successCreationAccount}">
-                <div class="alert alert-success" role="alert">
-                    Account Created Successfully
-                </div>
+            <div class="alert alert-success" role="alert">
+                Account Created Successfully
+            </div>
         </c:when>
     </c:choose>
 
@@ -38,7 +38,7 @@
             <c:when test="${not empty errors}">
                 <c:forEach var="error" items="${errors}">
                     <div class="alert alert-danger" role="alert">
-                        ${error}
+                            ${error}
                     </div>
                 </c:forEach>
             </c:when>
@@ -63,7 +63,7 @@
             <form action="signIn" method="post">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                    <input type="email" id="loginName" name="email" class="form-control" />
+                    <input type="email" id="loginName" name="email" class="form-control"/>
                     <label class="form-label" for="loginName">Email</label>
                 </div>
                 <!-- Password input -->
@@ -76,7 +76,7 @@
                     <div class="col-md-6 d-flex justify-content-center">
                         <!-- Checkbox -->
                         <div class="form-check mb-3 mb-md-0">
-                            <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
+                            <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked/>
                             <label class="form-check-label" for="loginCheck"> Remember me</label>
                         </div>
                     </div>
@@ -98,25 +98,25 @@
                 <p class="text-center">or:</p>
                 <!-- Name input -->
                 <div class="form-outline mb-4">
-                    <input type="text"  class="form-control" name="firstName" />
-                    <label class="form-label" >Firstname</label>
+                    <input type="text" class="form-control" name="firstName"/>
+                    <label class="form-label">Firstname</label>
                 </div>
                 <div class="form-outline mb-4">
-                    <input type="text"  class="form-control" name="lastName" />
-                    <label class="form-label" >Lastname</label>
+                    <input type="text" class="form-control" name="lastName"/>
+                    <label class="form-label">Lastname</label>
                 </div>
                 <div class="form-outline mb-4">
-                    <input type="text"  class="form-control" name="userName" />
-                    <label class="form-label" >Lastname</label>
+                    <input type="text" id="registerUsername" class="form-control" name="userName"/>
+                    <label class="form-label" for="registerUsername">Username</label>
                 </div>
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                    <input type="text" id="registerEmail" class="form-control" name="email" />
+                    <input type="email" id="registerEmail" class="form-control" name="email"/>
                     <label class="form-label" for="registerEmail">Email</label>
                 </div>
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                    <input type="text" id="registerPassword" class="form-control" name="password" />
+                    <input type="password" id="registerPassword" class="form-control" name="password"/>
                     <label class="form-label" for="registerPassword">Password</label>
                 </div>
                 <!-- Submit button -->

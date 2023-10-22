@@ -48,7 +48,6 @@
                         </div>
                     </a></li>
                 </form>
-
             </ul>
         </div>
 
@@ -135,8 +134,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 
 </main>
