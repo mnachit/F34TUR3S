@@ -1,15 +1,11 @@
 package com.gathergrid.Tests;
 
-import com.gathergrid.entities.Event;
 import com.gathergrid.entities.Response;
 import com.gathergrid.repository.CategorieRepository;
 import com.gathergrid.repository.EventRespository;
 import com.gathergrid.repository.UserRepository;
 import com.gathergrid.service.EventService;
 import com.gathergrid.service.imp.EventServiceImp;
-
-import java.net.ConnectException;
-import java.util.function.Predicate;
 
 public class TestingEventService {
 

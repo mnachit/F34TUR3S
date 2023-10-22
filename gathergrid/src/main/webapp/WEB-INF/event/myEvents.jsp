@@ -141,7 +141,6 @@
                                     <button type="submit" class="btn btn-black bg-black" style="margin-left: 10px"><i
                                             class="bi bi-binoculars"></i></button>
                                 </div>
-                                </a></li>
                             </form>
                         </div>
                         <hr class="my-3">

@@ -1,12 +1,10 @@
 package com.gathergrid.servlet;
 
-import com.gathergrid.entities.Comment;
 import com.gathergrid.entities.Event;
 import com.gathergrid.entities.Response;
 import com.gathergrid.repository.CategorieRepository;
 import com.gathergrid.entities.User;
 import com.gathergrid.factory.DbEntityManagerFactory;
-import com.gathergrid.repository.CommentRepository;
 import com.gathergrid.repository.EventRespository;
 import com.gathergrid.repository.UserRepository;
 import com.gathergrid.service.imp.CommentServiceImp;
@@ -19,7 +17,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet(name = "event_detail", urlPatterns = "/event_detail")
 public class EventDetail extends HttpServlet {

@@ -1,9 +1,5 @@
 package com.gathergrid.servlet;
 
-import com.gathergrid.repository.EventRespository;
-import com.gathergrid.repository.TicketRepository;
-import com.gathergrid.repository.UserRepository;
-import com.gathergrid.service.imp.TicketServiceImp;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

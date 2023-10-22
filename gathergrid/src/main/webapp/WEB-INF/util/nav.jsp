@@ -320,7 +320,7 @@
     width: calc(5rem - 1em - 8px);
     position: relative;
   }
-  .navbar-item-inner-icon-wrapper ion-icon {
+  .navbar-item-inner-icon-wrapper .ion-icon {
     position: absolute;
     font-size: calc(var(--navbar-buttons) - 1rem);
   }

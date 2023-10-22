@@ -1,6 +1,5 @@
 package com.gathergrid.servlet;
 
-import com.gathergrid.embeddables.AddressEmail;
 import com.gathergrid.entities.Event;
 import com.gathergrid.entities.Response;
 import com.gathergrid.entities.User;
@@ -24,7 +23,6 @@ import java.util.List;
 public class MyEventsServlet extends HttpServlet {
     EventService eventService;
     CategoryService categoryService;
-    private Integer vip_price;
 
     @Override
     public void init() {
@@ -45,7 +43,7 @@ public class MyEventsServlet extends HttpServlet {
         List<Event> events = null;
         Integer totalPages = 0;
         if (res.getStatus() == 200) {
-            List<Object> data = (List<Object>) res.getData();
+            List<Object> data =  (List<Object>) res.getData();
             events = (List<Event>) data.get(0);
             totalPages = (Integer) data.get(1);
         }
@@ -63,18 +61,22 @@ public class MyEventsServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         User loggedUser = (User) req.getSession().getAttribute("LoggedUser");
-
-
-        Long deleteId = Long.valueOf(req.getParameter("delete_id"));
+        Long deleteId = null;
+            try {
+                deleteId = Long.valueOf(req.getParameter("delete_id"));
+            }
+            catch (NumberFormatException e){
+                req.getSession().setAttribute("error", "Invalid Event Id");
+                resp.sendRedirect(req.getContextPath() + "/myEvents");
+            }
         if (deleteId != null) {
             Response res = eventService.deleteEvent(deleteId, loggedUser.getId());
             if (res.getStatus() == 200) {
                 req.getSession().setAttribute("success", res.getMessage());
                 resp.sendRedirect(req.getContextPath() + "/myEvents");
-            }
-            else {
+            } else {
                 req.getSession().setAttribute("error", res.getMessage());
                 resp.sendRedirect(req.getContextPath() + "/myEvents");
             }
@@ -90,12 +92,11 @@ public class MyEventsServlet extends HttpServlet {
         Integer vip_price = Integer.valueOf(req.getParameter("vip_price"));
         Integer regular_price = Integer.valueOf(req.getParameter("regular_price"));
         Integer basic_price = Integer.valueOf(req.getParameter("basic_price"));
-        Response res = eventService.createEvent(name, description, location,dateTime, vip_price, regular_price, basic_price, categoryId, loggedUser.getId());
+        Response res = eventService.createEvent(name, description, location, dateTime, vip_price, regular_price, basic_price, categoryId, loggedUser.getId());
         if (res.getStatus() == 200) {
             req.getSession().setAttribute("success", res.getMessage());
             resp.sendRedirect(req.getContextPath() + "/myEvents");
-        }
-        else {
+        } else {
             req.getSession().setAttribute("error", res.getMessage());
             resp.sendRedirect(req.getContextPath() + "/myEvents");
         }

@@ -1,7 +1,5 @@
 package com.gathergrid.repository;
 
-import java.util.List;
-
 import com.gathergrid.entities.User;
 
 public class UserRepository extends BaseRepository<User> {

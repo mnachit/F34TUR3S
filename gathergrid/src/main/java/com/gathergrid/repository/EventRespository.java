@@ -40,32 +40,27 @@ public class EventRespository {
 
     public List<Event> findAll() {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
-        List<Event> events = em.createQuery("select e from Event e", Event.class).getResultList();
-        return events;
+        return em.createQuery("select e from Event e", Event.class).getResultList();
     }
 
     public List<Event> findByPagination(int offset, int eventsPerPage) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
-        List<Event> events = em.createQuery("select e from Event e", Event.class).setFirstResult(offset).setMaxResults(eventsPerPage).getResultList();
-        return events;
+        return em.createQuery("select e from Event e", Event.class).setFirstResult(offset).setMaxResults(eventsPerPage).getResultList();
     }
 
     public List<Event> findByPagination(int offset, int eventsPerPage, User user) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
-        List<Event> events = em.createQuery("select e from Event e where e.user = :user", Event.class).setParameter("user", user).setFirstResult(offset).setMaxResults(eventsPerPage).getResultList();
-        return events;
+        return em.createQuery("select e from Event e where e.user = :user", Event.class).setParameter("user", user).setFirstResult(offset).setMaxResults(eventsPerPage).getResultList();
     }
 
     public Long findTotalEvents() {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
-        Long count = em.createQuery("select count(e) from Event e", Long.class).getSingleResult();
-        return count;
+        return em.createQuery("select count(e) from Event e", Long.class).getSingleResult();
     }
 
     public Long findTotalEvents(User user) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
-        Long count = em.createQuery("select count(e) from Event e where e.user = :user", Long.class).setParameter("user", user).getSingleResult();
-        return count;
+        return em.createQuery("select count(e) from Event e where e.user = :user", Long.class).setParameter("user", user).getSingleResult();
     }
 
     public List<Event> findAllByCategorie(Long id) {
@@ -78,8 +73,7 @@ public class EventRespository {
 
     public List<Event> searchEvents(int offset, int eventsPerPage, String term) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
-        List<Event> events = em.createQuery("select e from Event e where e.name like :term or e.description like :term or e.categorie.name like :term", Event.class).setParameter("term", "%" + term + "%").setFirstResult(offset).setMaxResults(eventsPerPage).getResultList();
-        return events;
+        return em.createQuery("select e from Event e where e.name like :term or e.description like :term or e.categorie.name like :term", Event.class).setParameter("term", "%" + term + "%").setFirstResult(offset).setMaxResults(eventsPerPage).getResultList();
     }
 
     public List<Event> searchMyEvents(int offset, int eventsPerPage, String term, User user) {
@@ -89,13 +83,11 @@ public class EventRespository {
 
     public Long searchEventsCount(String term) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
-        Long count = em.createQuery("select count(e) from Event e where e.name like :term or e.description like :term or e.categorie.name like :term", Long.class).setParameter("term", "%" + term + "%").getSingleResult();
-        return count;
+        return em.createQuery("select count(e) from Event e where e.name like :term or e.description like :term or e.categorie.name like :term", Long.class).setParameter("term", "%" + term + "%").getSingleResult();
     }
 
     public Long searchMyEventsCount(String term, User user) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
-        Long count = em.createQuery("select count(e) from Event e where e.name like :term or e.description like :term or e.categorie.name like :term", Long.class).setParameter("term", "%" + term + "%").getSingleResult();
-        return count;
+        return em.createQuery("select count(e) from Event e where (e.name like :term or e.description like :term or e.categorie.name like :term) AND e.user = :user", Long.class).setParameter("term", "%" + term + "%").setParameter("user", user).getSingleResult();
     }
 }

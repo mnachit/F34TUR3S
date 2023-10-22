@@ -52,10 +52,10 @@ public class EventServiceImp implements EventService {
         Long totalEvents;
         if (searchTerm != null) {
             events = eventRespository.searchEvents(offset, eventsPerPage, searchTerm);
-            totalEvents = (Long) eventRespository.searchEventsCount(searchTerm);
+            totalEvents = eventRespository.searchEventsCount(searchTerm);
         } else {
             events = eventRespository.findByPagination(offset, eventsPerPage);
-            totalEvents = (Long) eventRespository.findTotalEvents();
+            totalEvents = eventRespository.findTotalEvents();
         }
         Integer totalPages = (int) Math.ceil((double) totalEvents / eventsPerPage);
 
