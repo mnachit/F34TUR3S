@@ -1,6 +1,7 @@
 package com.gathergrid.service.imp;
 
 import com.gathergrid.entities.Event;
+import com.gathergrid.entities.Response;
 import com.gathergrid.entities.Ticket;
 import com.gathergrid.entities.User;
 import com.gathergrid.repository.TicketRepository;
@@ -8,6 +9,7 @@ import com.gathergrid.repository.EventRespository;
 import com.gathergrid.repository.UserRepository;
 
 import java.sql.Date;
+import java.util.List;
 
 public class TicketServiceImp {
     EventRespository eventRepository;
@@ -31,4 +33,14 @@ public class TicketServiceImp {
             ticketRepository.save(ticket);
         }
     }
+
+    public Response getTickets() {
+        List<Ticket> tickets = ticketRepository.findAll();
+        if(tickets.isEmpty()){
+            return new Response("No Events Found",404);
+        }else{
+            return new Response("Events Found",tickets,200);
+        }
+    }
+
 }
