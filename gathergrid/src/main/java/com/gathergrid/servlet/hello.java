@@ -20,7 +20,7 @@ public class hello extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
         out.println("<h1>" + message + "</h1>");
-//        EntityManagerFactory emf = jakarta.persistence.Persistence.createEntityManagerFactory("my-ana");
+//        EntityManagerFactory emf =     jakarta.persistence.Persistence.createEntityManagerFactory("my-ana");
 //        jakarta.persistence.EntityManager em = emf.createEntityManager();
 ////        em.getTransaction().begin();
 ////        em.persist(test);

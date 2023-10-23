@@ -2,7 +2,6 @@ package com.gathergrid.repository;
 
 import java.util.List;
 
-import com.gathergrid.entities.Ticket;
 import com.gathergrid.factory.DbEntityManagerFactory;
 
 import jakarta.persistence.EntityManager;
@@ -11,8 +10,8 @@ import jakarta.persistence.TypedQuery;
 
 public abstract class BaseRepository<E> {
 
-    private EntityManager entityManager;
-    private EntityTransaction transaction;
+    private final EntityManager entityManager;
+    private final EntityTransaction transaction;
 
     protected BaseRepository() {
         entityManager = DbEntityManagerFactory.getEntityManager();
@@ -20,13 +19,9 @@ public abstract class BaseRepository<E> {
     }
 
     public void save(E entity) {
-
         transaction.begin();
-
         entityManager.persist(entity);
-
         transaction.commit();
-
     }
 
     public void update(E entity) {
@@ -59,9 +54,7 @@ public abstract class BaseRepository<E> {
         transaction.begin();
 
         String jpql = "SELECT e FROM " + entityClass.getSimpleName() + " e WHERE e." + fieldName + " = :value";
-
         TypedQuery<E> query = entityManager.createQuery(jpql, entityClass);
-
         query.setParameter("value", value);
 
         E entity = query.getSingleResult();

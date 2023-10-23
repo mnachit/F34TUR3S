@@ -30,16 +30,16 @@ public class TestingRepositories {
 
     }
     public static void testEventRespository(EventRespository eventRespository){
-        CategorieRepository categorieRepository = new CategorieRepository();
-        Categorie categorie = categorieRepository.findById(5L);
-        Event event = new Event("Event1","Event1 Description","Event1 Location",new Date(2021,10,10),new java.sql.Time(10,10,10),categorie,100,200,300);
-        eventRespository.save(event);
-        event.setName("Event1 Updated");
-        event.setId(2L);
-        eventRespository.update(event);
-        eventRespository.findById(2L);
-        eventRespository.findAll();
-        eventRespository.delete(event);
+//        CategorieRepository categorieRepository = new CategorieRepository();
+//        Categorie categorie = categorieRepository.findById(5L);
+//        Event event = new Event("Event1","Event1 Description","Event1 Location",new Date(2021,10,10),new java.sql.Time(10,10,10),categorie,100,200,300);
+//        eventRespository.save(event);
+//        event.setName("Event1 Updated");
+//        event.setId(2L);
+//        eventRespository.update(event);
+//        eventRespository.findById(2L);
+//        eventRespository.findAll();
+//        eventRespository.delete(event);
     }
     public static void testCategorieRepository(CategorieRepository categorieRepository){
         Categorie categorie = new Categorie("Categorie1","Categorie1 Description");

@@ -14,6 +14,7 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequestWrapper;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
@@ -23,7 +24,7 @@ public class AuthentificationFilter implements Filter {
     private HttpServletRequest httpRequest;
     private HttpServletResponse httpResponse;
 
-    private List<String> reachablePathsWithoutAuthentication = Arrays.asList("/authentification", "/signUp",
+    private final List<String> reachablePathsWithoutAuthentication = Arrays.asList("/authentification", "/signUp",
             "/signIn");
 
     Predicate<User> noAccessToThisRoute = loggedUser -> {
@@ -61,12 +62,10 @@ public class AuthentificationFilter implements Filter {
                     "/authentification");
             return;
         }
-
         chain.doFilter(request, response);
 
-        // String url = httpRequest.getRequestURL().toString();
-        // httpResponse.sendRedirect(url);
     }
+
 
     public boolean reachablePathWithoutLogging() {
         String url = httpRequest.getRequestURL().toString();

@@ -22,8 +22,8 @@ import jakarta.validation.Validator;
 
 public class UserValidationHelper {
 
-    private UserRepository userRepository;
-    private Validator validator;
+    private final UserRepository userRepository;
+    private final Validator validator;
 
     public UserValidationHelper(UserRepository userRepository) {
         this.userRepository = userRepository;

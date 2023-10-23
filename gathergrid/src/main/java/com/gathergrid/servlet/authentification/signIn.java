@@ -1,7 +1,6 @@
 package com.gathergrid.servlet.authentification;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import com.gathergrid.embeddables.AddressEmail;
 import com.gathergrid.embeddables.Password;

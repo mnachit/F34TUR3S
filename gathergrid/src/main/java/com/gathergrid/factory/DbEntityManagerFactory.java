@@ -27,11 +27,10 @@ public class DbEntityManagerFactory {
         }
     }
     public static EntityManager getEntityManager(){
-        if(em == null) {
+        if(em == null || !em.isOpen()) {
             em = getEntityManagerFactory().createEntityManager();
             return em;
         }
-
         return em;
     }
     public static void closeEntityManager(){

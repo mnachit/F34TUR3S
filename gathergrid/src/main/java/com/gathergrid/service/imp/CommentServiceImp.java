@@ -5,14 +5,13 @@ import com.gathergrid.entities.Event;
 import com.gathergrid.entities.Response;
 import com.gathergrid.entities.User;
 import com.gathergrid.factory.DbEntityManagerFactory;
-import com.gathergrid.repository.CommentRepository;
 import com.gathergrid.repository.EventRespository;
 
 import java.sql.Date;
 
 public class CommentServiceImp {
 
-    private EventRespository eventRespository;
+    private final EventRespository eventRespository;
     public CommentServiceImp(EventRespository eventRespository) {
         this.eventRespository = eventRespository;
     }
@@ -21,7 +20,7 @@ public class CommentServiceImp {
             return new Response("Comment Text is Empty",400);
         }else if(event_id == null){
             return new Response("Event Id is Empty",400);
-        }else if(DbEntityManagerFactory.getEntityManager().contains(user) == false){
+        }else if(!DbEntityManagerFactory.getEntityManager().contains(user)){
             return new Response("User is not Existing ",400);
         }else {
             Event event = eventRespository.findById(event_id);

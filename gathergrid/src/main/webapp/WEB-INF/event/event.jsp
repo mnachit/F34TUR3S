@@ -83,9 +83,17 @@
                 </div>
             </div>
         </div>
-        <div class="text-center mb-3">
-            <button type="button" class="btn btn-success">Get Ticket</button>
-        </div>
+        <form action="submitTicket/${event.id}" method="post">
+            <div class="text-center mb-3"><div class="container">
+                <div class="row">
+                    <div class="col-md-4 offset-md-4">
+                        <input min="1" max="4" type="number" name="input" id="typeNumber" class="form-control text-center" value="1"/>
+                    </div>
+                </div>
+            </div>
+                <button type="submit" class="mt-2 btn btn-success">Get Ticket</button>
+            </div>
+        </form>
         <div class="row justify-content-center">
             <div class="col">
                 <div class="card shadow-0 border" style="background-color: #f0f2f5;">

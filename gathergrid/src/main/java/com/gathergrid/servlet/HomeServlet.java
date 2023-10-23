@@ -2,8 +2,9 @@ package com.gathergrid.servlet;
 
 import com.gathergrid.entities.Event;
 import com.gathergrid.entities.Response;
+import com.gathergrid.repository.CategorieRepository;
 import com.gathergrid.repository.EventRespository;
-import com.gathergrid.service.EventService;
+import com.gathergrid.repository.UserRepository;
 import com.gathergrid.service.imp.EventServiceImp;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,14 +14,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 @WebServlet("/")
 public class HomeServlet extends HttpServlet {
     EventServiceImp eventServiceImp;
 
     public void init() {
-        eventServiceImp = new EventServiceImp(new EventRespository());
+        eventServiceImp = new EventServiceImp(new EventRespository(), new CategorieRepository(), new UserRepository());
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {

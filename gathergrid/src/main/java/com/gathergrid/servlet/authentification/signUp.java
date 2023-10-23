@@ -1,7 +1,6 @@
 package com.gathergrid.servlet.authentification;
 
 import java.io.IOException;
-import java.util.List;
 
 import com.gathergrid.entities.User;
 import com.gathergrid.exceptions.factories.ExceptionHandlerFactory;
