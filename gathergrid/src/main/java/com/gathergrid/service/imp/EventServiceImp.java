@@ -89,7 +89,6 @@ public class EventServiceImp implements EventService {
         } else {
             return new Response("Events Found", List.of(events, totalPages), 200);
         }
-
     }
 
     @Override

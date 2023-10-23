@@ -33,7 +33,7 @@
 <body>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <!-- Navbar -->
-<jsp:include page="WEB-INF/util/nav.jsp" />
+<jsp:include page="../util/nav.jsp" />
 <!-- Main -->
 <main id="main" class="flexbox-col">
     <div class="col">

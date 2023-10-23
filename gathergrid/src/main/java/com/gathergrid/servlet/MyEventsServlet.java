@@ -65,7 +65,7 @@ public class MyEventsServlet extends HttpServlet {
         User loggedUser = (User) req.getSession().getAttribute("LoggedUser");
         Long deleteId;
             try {
-                deleteId = req.getParameter("deleteId") != null ? Long.valueOf(req.getParameter("deleteId")) : null;
+                deleteId = req.getParameter("delete_id") != null ? Long.valueOf(req.getParameter("delete_id")) : null;
             }
             catch (NumberFormatException e){
                 req.getSession().setAttribute("error", "Invalid Event Id");

@@ -45,12 +45,18 @@ public class EventRespository {
 
     public List<Event> findByPagination(int offset, int eventsPerPage) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
-        return em.createQuery("select e from Event e", Event.class).setFirstResult(offset).setMaxResults(eventsPerPage).getResultList();
+        em.getTransaction().begin();
+        List<Event> events = em.createQuery("select e from Event e", Event.class).setFirstResult(offset).setMaxResults(eventsPerPage).getResultList();
+        em.getTransaction().commit();
+        return events;
     }
 
     public List<Event> findByPagination(int offset, int eventsPerPage, User user) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
-        return em.createQuery("select e from Event e where e.user = :user", Event.class).setParameter("user", user).setFirstResult(offset).setMaxResults(eventsPerPage).getResultList();
+        em.getTransaction().begin();
+        List<Event> events =  em.createQuery("select e from Event e where e.user = :user", Event.class).setParameter("user", user).setFirstResult(offset).setMaxResults(eventsPerPage).getResultList();
+        em.getTransaction().commit();
+        return events;
     }
 
     public Long findTotalEvents() {
@@ -73,12 +79,14 @@ public class EventRespository {
 
     public List<Event> searchEvents(int offset, int eventsPerPage, String term) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
-        return em.createQuery("select e from Event e where e.name like :term or e.description like :term or e.categorie.name like :term", Event.class).setParameter("term", "%" + term + "%").setFirstResult(offset).setMaxResults(eventsPerPage).getResultList();
+        List<Event> events =   em.createQuery("select e from Event e where e.name like :term or e.description like :term or e.categorie.name like :term", Event.class).setParameter("term", "%" + term + "%").setFirstResult(offset).setMaxResults(eventsPerPage).getResultList();
+        return events;
     }
 
     public List<Event> searchMyEvents(int offset, int eventsPerPage, String term, User user) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();
-        return em.createQuery("select e from Event e where (e.name like :term or e.description like :term or e.categorie.name like :term) AND e.user = :user", Event.class).setParameter("term", "%" + term + "%").setParameter("user", user).setFirstResult(offset).setMaxResults(eventsPerPage).getResultList();
+        List<Event> events =  em.createQuery("select e from Event e where (e.name like :term or e.description like :term or e.categorie.name like :term) AND e.user = :user", Event.class).setParameter("term", "%" + term + "%").setParameter("user", user).setFirstResult(offset).setMaxResults(eventsPerPage).getResultList();
+        return events;
     }
 
     public Long searchEventsCount(String term) {

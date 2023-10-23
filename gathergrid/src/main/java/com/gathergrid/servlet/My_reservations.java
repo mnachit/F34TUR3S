@@ -26,7 +26,7 @@ public class My_reservations extends HttpServlet {
         request.setAttribute("events", events);
 
 
-        RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/My_reservations.jsp");
+        RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/event/My_reservations.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (Exception e) {
