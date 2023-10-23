@@ -24,7 +24,7 @@ public class AuthentificationFilter implements Filter {
     private HttpServletRequest httpRequest;
     private HttpServletResponse httpResponse;
 
-    private List<String> reachablePathsWithoutAuthentication = Arrays.asList("/authentification", "/signUp",
+    private final List<String> reachablePathsWithoutAuthentication = Arrays.asList("/authentification", "/signUp",
             "/signIn");
 
     Predicate<User> noAccessToThisRoute = loggedUser -> {

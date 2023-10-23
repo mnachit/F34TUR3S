@@ -33,7 +33,7 @@
 <body>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <!-- Navbar -->
-<jsp:include page="./WEB-INF/util/nav.jsp" />
+<jsp:include page="WEB-INF/util/nav.jsp" />
 <!-- Main -->
 <main id="main" class="flexbox-col">
     <div class="col">
@@ -48,6 +48,7 @@
                         </div>
                     </a></li>
                 </form>
+
             </ul>
         </div>
 
@@ -70,42 +71,34 @@
                                         <th>Basic Price</th>
                                         <th>Regular Price</th>
                                         <th>Vip Price</th>
-                                        <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <c:forEach items="${events}" var="event">
                                         <tr>
                                             <td class="align-middle text-center">
-                                                    ${event.name}
+                                                    ${event.event.name}
                                             </td>
-                                            <td class="text-nowrap align-middle">${event.date}</td>
-                                            <td class="text-nowrap align-middle"><span><c:out value="${ event.location}"></c:out></span></td>
+                                            <td class="text-nowrap align-middle">${event.event.date}</td>
+                                            <td class="text-nowrap align-middle"><span><c:out value="${ event.event.location}"></c:out></span></td>
                                             <td class="text-center align-middle">
                                                 <div class="btn-group align-top">
-                                                        ${event.categorie.name}
+                                                        ${event.event.categorie.name}
                                                 </div>
                                             </td>
                                             <td class="text-center align-middle">
                                                 <div class="btn-group align-top">
-                                                        ${event.basic_price} $
+                                                        ${event.event.basic_price} $
                                                 </div>
                                             </td>
                                             <td class="text-center align-middle">
                                                 <div class="btn-group align-top">
-                                                        ${event.regular_price} $
+                                                        ${event.event.regular_price} $
                                                 </div>
                                             </td>
                                             <td class="text-center align-middle">
                                                 <div class="btn-group align-top">
-                                                        ${event.vip_price} $
-                                                </div>
-                                            </td>
-                                            <td class="text-center align-middle">
-                                                <div class="btn-group align-top">
-                                                    <a href="event_detail?event=${event.id}" style="text-decoration: none" rli="${event.id}">
-                                                        <button class="btn btn-sm btn-outline-secondary badge" type="button">View Event</button>
-                                                    </a>
+                                                        ${event.event.vip_price} $
                                                 </div>
                                             </td>
                                         </tr>
@@ -114,26 +107,13 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination">
-                                    <li class="page-item <c:if test="${pageNumber == 1}">disabled</c:if>">
-                                        <a class="page-link" href="?page=${pageNumber - 1}">&laquo;</a>
-                                    </li>
-                                    <c:forEach var="i" begin="1" end="${totalPages}">
-                                        <li class="page-item <c:if test="${pageNumber == i}">active</c:if>">
-                                            <a class="page-link" href="?page=${i}"><c:out value="${i}" /></a>
-                                        </li>
-                                    </c:forEach>
-                                    <li class="page-item <c:if test="${pageNumber == totalPages}">disabled</c:if>">
-                                        <a class="page-link" href="?page=${pageNumber + 1}">&raquo;</a>
-                                    </li>
-                                </ul>
-                            </nav>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 
 </main>

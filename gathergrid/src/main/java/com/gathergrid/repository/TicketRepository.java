@@ -1,6 +1,5 @@
 package com.gathergrid.repository;
 
-import com.gathergrid.entities.Response;
 import com.gathergrid.entities.Ticket;
 import com.gathergrid.factory.DbEntityManagerFactory;
 import jakarta.persistence.EntityManager;
@@ -47,5 +46,13 @@ public class TicketRepository {
         em.getTransaction().commit();
         return tickets;
     }
+    public List<Ticket> findByUser(Long id) {
+        EntityManager em = DbEntityManagerFactory.getEntityManager();
+        em.getTransaction().begin();
+        java.util.List<Ticket> tickets = em.createQuery("select t from Ticket t where t.user.id = :id",Ticket.class).setParameter("id",id).getResultList();
+        em.getTransaction().commit();
+        return tickets;
+    }
+    
 
 }
