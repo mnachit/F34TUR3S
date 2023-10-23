@@ -471,7 +471,7 @@
       </a>
     </li>
     <li class="navbar-item flexbox-left">
-      <a class="navbar-item-inner flexbox-left" href="Edit_Profile">
+      <a class="navbar-item-inner flexbox-left" href="profile">
         <div class="navbar-item-inner-icon-wrapper flexbox">
           <i class="bi bi-person-fill"></i>
         </div>
@@ -479,7 +479,7 @@
       </a>
     </li>
     <li class="navbar-item flexbox-left">
-      <a class="navbar-item-inner flexbox-left">
+      <a class="navbar-item-inner flexbox-left" href="logOut">
         <div class="navbar-item-inner-icon-wrapper flexbox">
           <i class="bi bi-arrow-right-circle-fill"></i>
         </div>
