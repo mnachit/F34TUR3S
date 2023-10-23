@@ -63,13 +63,14 @@ public class MyEventsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         User loggedUser = (User) req.getSession().getAttribute("LoggedUser");
-        Long deleteId = null;
+        Long deleteId;
             try {
-                deleteId = Long.valueOf(req.getParameter("delete_id"));
+                deleteId = req.getParameter("deleteId") != null ? Long.valueOf(req.getParameter("deleteId")) : null;
             }
             catch (NumberFormatException e){
                 req.getSession().setAttribute("error", "Invalid Event Id");
                 resp.sendRedirect(req.getContextPath() + "/myEvents");
+                return;
             }
         if (deleteId != null) {
             Response res = eventService.deleteEvent(deleteId, loggedUser.getId());
@@ -100,10 +101,5 @@ public class MyEventsServlet extends HttpServlet {
             req.getSession().setAttribute("error", res.getMessage());
             resp.sendRedirect(req.getContextPath() + "/myEvents");
         }
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doDelete(req, resp);
     }
 }
