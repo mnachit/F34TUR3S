@@ -26,7 +26,6 @@ public class changingPassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Display the changing password form
         request.getRequestDispatcher("/WEB-INF/profile/changePassword.jsp").forward(request, response);
     }
 

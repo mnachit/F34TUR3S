@@ -57,4 +57,8 @@ public class UserService extends UserValidationHelper {
         updateAccount(user, request);
     }
 
+    public void logoutUser(HttpServletRequest request) {
+        request.getSession().removeAttribute("LoggedUser");
+    }
+
 }
