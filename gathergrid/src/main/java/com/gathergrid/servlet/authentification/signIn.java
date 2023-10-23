@@ -7,7 +7,7 @@ import com.gathergrid.embeddables.AddressEmail;
 import com.gathergrid.embeddables.Password;
 import com.gathergrid.entities.User;
 import com.gathergrid.exceptions.factories.ExceptionHandlerFactory;
-import com.gathergrid.exceptions.implementation.ExceptionHandler;
+import com.gathergrid.exceptions.interfaces.ExceptionHandler;
 import com.gathergrid.service.UserService;
 
 import jakarta.servlet.RequestDispatcher;

@@ -29,6 +29,16 @@ public abstract class BaseRepository<E> {
 
     }
 
+    public void update(E entity) {
+
+        transaction.begin();
+
+        entityManager.merge(entity);
+
+        transaction.commit();
+
+    }
+
     public List<E> fetchAll(Class<E> entityClass) {
 
         String jpql = "SELECT e FROM " + entityClass.getSimpleName() + " e";

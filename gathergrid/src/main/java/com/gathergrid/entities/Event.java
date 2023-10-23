@@ -10,7 +10,8 @@ import java.util.Currency;
 import java.util.List;
 
 @Entity
-@Setter@Getter
+@Setter
+@Getter
 public class Event {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
@@ -28,7 +29,8 @@ public class Event {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "event", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
-    public Event(String name, String description, String location, Date date, Time time, Categorie categorie, int vip_price, int regular_price, int basic_price, List<Comment> comments) {
+    public Event(String name, String description, String location, Date date, Time time, Categorie categorie,
+            int vip_price, int regular_price, int basic_price, List<Comment> comments) {
         this.name = name;
         this.description = description;
         this.location = location;
@@ -41,7 +43,8 @@ public class Event {
         this.comments = comments;
     }
 
-    public Event(String name, String description, String location, Date date, Time time, Categorie categorie, int vip_price, int regular_price, int basic_price) {
+    public Event(String name, String description, String location, Date date, Time time, Categorie categorie,
+            int vip_price, int regular_price, int basic_price) {
         this.name = name;
         this.description = description;
         this.location = location;
@@ -53,7 +56,8 @@ public class Event {
         this.basic_price = basic_price;
     }
 
-    public Event(String name, String description, String location, Date date, Time time, int vip_price, int regular_price, int basic_price) {
+    public Event(String name, String description, String location, Date date, Time time, int vip_price,
+            int regular_price, int basic_price) {
         this.name = name;
         this.description = description;
         this.location = location;

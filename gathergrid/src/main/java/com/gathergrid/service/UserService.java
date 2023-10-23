@@ -31,8 +31,13 @@ public class UserService extends UserValidationHelper {
 
     }
 
-    public void updateProfile(User user) {
-        
+    public void updateProfile(User givenUser) {
+
+        User fetchedUser = getUserById(givenUser.getId());
+
+        validatePassword(givenUser, fetchedUser);
+
+        updateAccount(givenUser);
     }
 
 }

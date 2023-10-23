@@ -3,7 +3,7 @@ package com.gathergrid.exceptions.handlers;
 import java.util.List;
 
 import com.gathergrid.exceptions.costums.NotMatchedException;
-import com.gathergrid.exceptions.implementation.ExceptionHandler;
+import com.gathergrid.exceptions.interfaces.ExceptionHandler;
 
 import jakarta.servlet.http.HttpServletRequest;
 

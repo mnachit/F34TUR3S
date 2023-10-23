@@ -26,15 +26,22 @@ public class UserValidationHelper {
     public UserValidationHelper(UserRepository userRepository) {
         this.userRepository = userRepository;
         this.validator = Validation.buildDefaultValidatorFactory().getValidator();
-
     }
 
     protected User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
+    protected User getUserById(Long id) {
+        return userRepository.findById(id);
+    }
+
     protected void addAccount(User user) {
         userRepository.save(user);
+    }
+
+    protected void updateAccount(User user) {
+        userRepository.update(user);
     }
 
     protected void storeLoggedUserInSession(User user, HttpServletRequest request) {
