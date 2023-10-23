@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile</title>
+    <title>Edit</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
@@ -16,7 +16,30 @@
 <body>
 
 <div class="container">
-    <h2>Edit Profile</h2>
+
+
+     <c:choose>
+        <c:when test="${successUpdationAccount}">
+                <div class="alert alert-success" role="alert">
+                    Account Updated Successfully
+                </div>
+        </c:when>
+    </c:choose>
+
+    <div class="error-container" style="height: 200px; overflow-y: auto;">
+        <c:choose>
+            <c:when test="${not empty errors}">
+                <c:forEach var="error" items="${errors}">
+                    <div class="alert alert-danger" role="alert">
+                        ${error}
+                    </div>
+                </c:forEach>
+            </c:when>
+        </c:choose>
+    </div>
+
+
+    <h2>Edit Profile ssss</h2>
     
     <form action="profile" method="post">
         <!-- First Name -->
@@ -53,5 +76,4 @@
     </form>
 </div>
 
-<!-- Include Bootstrap JS and jQuery -->
-<script src
+

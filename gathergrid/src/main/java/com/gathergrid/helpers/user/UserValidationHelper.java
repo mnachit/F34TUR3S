@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.gathergrid.embeddables.AddressEmail;
+import com.gathergrid.embeddables.Name;
 import com.gathergrid.entities.User;
 import com.gathergrid.exceptions.costums.AlreadyExistsException;
 import com.gathergrid.exceptions.costums.DoNotExistsException;
@@ -36,21 +37,22 @@ public class UserValidationHelper {
         return userRepository.findById(id);
     }
 
+    protected User getStoredLoggedUserFromSession(HttpServletRequest request) {
+        return (User) request.getSession().getAttribute("LoggedUser");
+    }
+
     protected void addAccount(User user) {
         userRepository.save(user);
     }
 
-    protected void updateAccount(User user) {
+    protected User updateAccount(User user, HttpServletRequest request) {
+        user.setId(getStoredLoggedUserFromSession(request).getId());
         userRepository.update(user);
+        return user;
     }
 
     protected void storeLoggedUserInSession(User user, HttpServletRequest request) {
-        HttpSession httpSession = request.getSession();
-        httpSession.setAttribute("LoggedUser", user);
-    }
-
-    protected User getStoredLoggedUserFromSession(HttpServletRequest request) {
-        return (User) request.getSession().getAttribute("LoggedUser");
+        request.getSession().setAttribute("LoggedUser", user);
     }
 
     protected void validateEmail(AddressEmail addressEmail) {
@@ -71,6 +73,22 @@ public class UserValidationHelper {
         }
 
         if (userNameAlreadyExists(user.getName().getUserName())) {
+            throw new AlreadyExistsException("Username is already exists");
+        }
+
+    }
+
+    protected void validateUserOnUpdate(User user, HttpServletRequest request) {
+
+        validateObject(user);
+
+        Long userId = getStoredLoggedUserFromSession(request).getId();
+
+        if (userHasUpdatesHisEmail(userId, user.getEmail()) && emailAlreadyExists(user.getEmail().getAddressEmail())) {
+            throw new AlreadyExistsException("Email is already exists");
+        }
+
+        if (userHasUpdatesHisUserName(userId, user.getName()) && userNameAlreadyExists(user.getName().getUserName())) {
             throw new AlreadyExistsException("Username is already exists");
         }
 
@@ -115,6 +133,14 @@ public class UserValidationHelper {
 
     protected boolean emailAlreadyExists(String email) {
         return userRepository.existsByEmail(email);
+    }
+
+    protected boolean userHasUpdatesHisEmail(Long userId, AddressEmail email) {
+        return !getUserById(userId).getEmail().getAddressEmail().equals(email.getAddressEmail());
+    }
+
+    protected boolean userHasUpdatesHisUserName(Long userId, Name name) {
+        return !getUserById(userId).getName().getUserName().equals(name.getUserName());
     }
 
 }

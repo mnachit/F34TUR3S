@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebFilter("/*")
+// @WebFilter("/*")
 public class AuthentificationFilter implements Filter {
 
     private HttpServletRequest httpRequest;
@@ -36,7 +36,8 @@ public class AuthentificationFilter implements Filter {
     };
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+    public void doFilter(ServletRequest request, ServletResponse response,
+            FilterChain chain)
             throws IOException, ServletException {
 
         httpRequest = (HttpServletRequest) request;
@@ -46,7 +47,8 @@ public class AuthentificationFilter implements Filter {
 
         User loggedUser = (User) httpSession.getAttribute("LoggedUser");
 
-        // This Condition Is For Not returning to anthetifications servlets if the user
+        // This Condition Is For Not returning to anthetifications servlets if the
+        // user
         // already Logged In
         if (loggedUser != null && reachablePathWithoutLogging()) {
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/");
@@ -55,11 +57,15 @@ public class AuthentificationFilter implements Filter {
 
         // This Condition Is For Not Accesseding Other Pages Without Logging In
         if (noAccessToThisRoute.test(loggedUser)) {
-            httpResponse.sendRedirect(httpRequest.getContextPath() + "/authentification");
+            httpResponse.sendRedirect(httpRequest.getContextPath() +
+                    "/authentification");
             return;
         }
 
         chain.doFilter(request, response);
+
+        // String url = httpRequest.getRequestURL().toString();
+        // httpResponse.sendRedirect(url);
     }
 
     public boolean reachablePathWithoutLogging() {
