@@ -107,6 +107,13 @@
                         </div>
                     </c:forEach>
                     <form action="" method="post">
+                        <%
+                            if(request.getAttribute("error") != null) {
+                        %>
+                        <p><%= request.getAttribute("error") %></p>
+                        <%
+                            }
+                        %>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="Add a comment" name="text"
                                    required>

@@ -38,7 +38,7 @@ public class EventServiceImp implements EventService {
         int offset = (page - 1) * eventsPerPage;
         List<Event> events ;
         Long totalEvents;
-        if(searchTerm !=null){
+        if(searchTerm !=null && !searchTerm.isEmpty()){
             events = eventRespository.searchEvents(offset, eventsPerPage,searchTerm);
             totalEvents = (Long) eventRespository.searchEventsCount(searchTerm);
         }else{

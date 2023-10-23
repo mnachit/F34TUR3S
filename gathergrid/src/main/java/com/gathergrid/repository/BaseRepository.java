@@ -20,13 +20,9 @@ public abstract class BaseRepository<E> {
     }
 
     public void save(E entity) {
-
         transaction.begin();
-
         entityManager.persist(entity);
-
         transaction.commit();
-
     }
 
     public List<E> fetchAll(Class<E> entityClass) {
@@ -39,13 +35,9 @@ public abstract class BaseRepository<E> {
     }
 
     public E findBy(Class<E> entityClass, String fieldName, Object value) {
-
         String jpql = "SELECT e FROM " + entityClass.getSimpleName() + " e WHERE e." + fieldName + " = :value";
-
         TypedQuery<E> query = entityManager.createQuery(jpql, entityClass);
-
         query.setParameter("value", value);
-
         return query.getSingleResult();
     }
 

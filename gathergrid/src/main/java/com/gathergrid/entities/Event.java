@@ -27,7 +27,6 @@ public class Event {
     private int basic_price;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "event", cascade = CascadeType.ALL)
     private List<Comment> comments;
-
     public Event(String name, String description, String location, Date date, Time time, Categorie categorie, int vip_price, int regular_price, int basic_price, List<Comment> comments) {
         this.name = name;
         this.description = description;
@@ -52,7 +51,6 @@ public class Event {
         this.regular_price = regular_price;
         this.basic_price = basic_price;
     }
-
     public Event(String name, String description, String location, Date date, Time time, int vip_price, int regular_price, int basic_price) {
         this.name = name;
         this.description = description;
@@ -63,10 +61,8 @@ public class Event {
         this.regular_price = regular_price;
         this.basic_price = basic_price;
     }
-
     public Event() {
     }
-
     @Override
     public String toString() {
         return "Event{" +

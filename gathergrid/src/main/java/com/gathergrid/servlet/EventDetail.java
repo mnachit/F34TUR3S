@@ -32,21 +32,24 @@ public class EventDetail extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if(request.getParameter("event") == null){
            response.sendRedirect("home");
+           return;
         }else{
             Long id = Long.parseLong(request.getParameter("event"));
             Event event = null;
             Response res = eventServiceImp.getEvent(id);
             if(res.getStatus() == 200){
-                event = (Event) eventServiceImp.getEvent(id).getData();
-            }
-            System.out.println(event);
-            request.setAttribute("event",event);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/event/event.jsp");
-            try {
-                dispatcher.forward(request, response);
-            } catch (Exception e) {
-                e.printStackTrace();
-                response.getWriter().println("Error: " + e.getMessage());
+                event = (Event) res.getData();
+                request.setAttribute("event",event);
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/event/event.jsp");
+                try {
+                    dispatcher.forward(request, response);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    response.getWriter().println("Error: " + e.getMessage());
+                }
+            }else{
+                response.sendRedirect("home");
+                return;
             }
 
         }
@@ -56,14 +59,12 @@ public class EventDetail extends HttpServlet {
 //          get add comment request
         String text = request.getParameter("text");
         Long event_id = Long.parseLong(request.getParameter("event_id"));
-//        User user = (User) request.getSession().getAttribute("user");
-        EntityManager em = DbEntityManagerFactory.getEntityManager();
-        User user = em.find(User.class,1L);
+        User user = (User) request.getSession().getAttribute("LoggedUser");
         Response res  =  commentServiceImp.addComment(text,event_id,user);
         if(res.getStatus() == 200){
             response.sendRedirect("event_detail?event="+event_id);
         }else{
-            response.sendRedirect("event_detail?event="+event_id);
+            response.sendRedirect("event_detail?event="+event_id+"&error="+res.getMessage());
         }
 
     }

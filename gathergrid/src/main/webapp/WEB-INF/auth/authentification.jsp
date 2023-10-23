@@ -23,7 +23,7 @@
 </head>
 
 <body>
-<div class="container p-5 " style="width: 60%;border: black solid 1px;border-radius: 3px" >
+<div class="container p-5 mt-2" style="width: 60%;border: black solid 1px;border-radius: 3px" >
 
     <c:choose>
         <c:when test="${successCreationAccount}">

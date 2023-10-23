@@ -14,6 +14,7 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequestWrapper;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
@@ -58,9 +59,10 @@ public class AuthentificationFilter implements Filter {
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/authentification");
             return;
         }
-
         chain.doFilter(request, response);
+
     }
+
 
     public boolean reachablePathWithoutLogging() {
         String url = httpRequest.getRequestURL().toString();
