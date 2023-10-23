@@ -48,8 +48,7 @@ public class AuthentificationFilter implements Filter {
 
         User loggedUser = (User) httpSession.getAttribute("LoggedUser");
 
-        // This Condition Is For Not returning to anthetifications servlets if the
-        // user
+        // This Condition Is For Not returning to anthetifications servlets if the user
         // already Logged In
         if (loggedUser != null && reachablePathWithoutLogging()) {
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/");
@@ -62,6 +61,7 @@ public class AuthentificationFilter implements Filter {
                     "/authentification");
             return;
         }
+
         chain.doFilter(request, response);
 
     }
