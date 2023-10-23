@@ -112,6 +112,44 @@ public class EventServiceImp implements EventService {
     }
 
     @Override
+    public Response updateEvent(Long id, String title, String description, String location, String dateTime, int vip_price, int regular_price, int basic_price, Long category, Long user) {
+        Categorie eventCategory = categorieRepository.findById(category);
+        User loggedUser = userRepository.findById(user);
+        if (loggedUser == null) {
+            return new Response("User Not Found", 403);
+        }
+        if (eventCategory == null) {
+            return new Response("Category Not Found", 404);
+        }
+        Event event = eventRespository.findById(id);
+        if (event == null) {
+            return new Response("Event Not Found", 404);
+        }
+        if (event.getUser() != loggedUser) {
+            return new Response("You are not allowed to update this event", 403);
+        }
+
+        String[] dateTimeArray = dateTime.split("T");
+        LocalDate formattedDate = LocalDate.parse(dateTimeArray[0]);
+        LocalTime formattedTime = LocalTime.parse(dateTimeArray[1]);
+
+        event.setId(id);
+        event.setName(title);
+        event.setDescription(description);
+        event.setLocation(location);
+        event.setDate(formattedDate);
+        event.setTime(formattedTime);
+        event.setCategorie(eventCategory);
+        event.setVip_price(vip_price);
+        event.setRegular_price(regular_price);
+        event.setBasic_price(basic_price);
+
+        eventRespository.update(event);
+
+        return new Response("Event Updated", 200);
+    }
+
+    @Override
     public Response deleteEvent(Long id, Long userId) {
         User loggedUser = userRepository.findById(userId);
         if (loggedUser == null) {

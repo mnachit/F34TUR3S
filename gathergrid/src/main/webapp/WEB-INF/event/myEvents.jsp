@@ -27,7 +27,7 @@
         <%--@elvariable id="success" type="java.lang.String"--%>
         <c:when test="${not empty success}">
             <div class="alert alert-success" role="alert">
-                Account Created Successfully
+                ${success}
             </div>
             <c:remove var="success" scope="session"/>
         </c:when>
@@ -90,7 +90,11 @@
                                             <td class="text-center align-middle">
                                                 <div class="btn-group align-top">
                                                     <form action="<c:url value=""/>" method="POST">
-                                                        <input type="hidden" name="_method" value="DELETE"/>
+                                                        <input type="hidden" name="edit_id" value="${event.id}"/>
+                                                        <button class="btn btn-sm btn-outline-secondary badge"
+                                                                type="submit"><i class="fa fa-edit"></i></button>
+                                                    </form>
+                                                    <form action="<c:url value=""/>" method="POST">
                                                         <input type="hidden" name="delete_id" value="${event.id}"/>
                                                         <button class="btn btn-sm btn-outline-secondary badge"
                                                                 type="submit"><i class="fa fa-trash"></i></button>
@@ -266,9 +270,6 @@
 </main>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript">
-
-</script>
 </body>
 
 </html>
