@@ -49,6 +49,10 @@ public class UserValidationHelper {
         httpSession.setAttribute("LoggedUser", user);
     }
 
+    protected User getStoredLoggedUserFromSession(HttpServletRequest request) {
+        return (User) request.getSession().getAttribute("LoggedUser");
+    }
+
     protected void validateEmail(AddressEmail addressEmail) {
 
         validateObject(addressEmail);

@@ -53,7 +53,7 @@ public class profile extends HttpServlet {
 
         try {
 
-            userService.updateProfile(user);
+            userService.updateProfile(user, request);
 
             request.setAttribute("successUpdationAccount", true);
 

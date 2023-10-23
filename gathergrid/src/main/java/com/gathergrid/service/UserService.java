@@ -31,13 +31,17 @@ public class UserService extends UserValidationHelper {
 
     }
 
-    public void updateProfile(User givenUser) {
+    public void updateProfile(User givenUser, HttpServletRequest request) {
 
-        User fetchedUser = getUserById(givenUser.getId());
+        validateUser(givenUser);
+
+        User fetchedUser = getUserById(getStoredLoggedUserFromSession(request).getId());
 
         validatePassword(givenUser, fetchedUser);
 
         updateAccount(givenUser);
+
+        storeLoggedUserInSession(givenUser, request);
     }
 
 }
