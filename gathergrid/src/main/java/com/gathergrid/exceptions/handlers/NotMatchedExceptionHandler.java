@@ -3,7 +3,7 @@ package com.gathergrid.exceptions.handlers;
 import java.util.List;
 
 import com.gathergrid.exceptions.costums.NotMatchedException;
-import com.gathergrid.exceptions.implementation.ExceptionHandler;
+import com.gathergrid.exceptions.interfaces.ExceptionHandler;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -13,6 +13,8 @@ public class NotMatchedExceptionHandler implements ExceptionHandler {
     public void handleException(Exception exception, HttpServletRequest request) {
 
         NotMatchedException notMatchedException = (NotMatchedException) exception;
+
+        request.getSession().setAttribute("errors", List.of(notMatchedException.getError()));
 
         request.setAttribute("errors", List.of(notMatchedException.getError()));
 

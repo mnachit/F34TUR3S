@@ -7,7 +7,6 @@ import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
-
 public class EventRespository {
     public void save(Event event) {
         EntityManager em = DbEntityManagerFactory.getEntityManager();

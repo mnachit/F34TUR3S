@@ -1,4 +1,4 @@
-package com.gathergrid.exceptions.implementation;
+package com.gathergrid.exceptions.interfaces;
 
 import jakarta.servlet.http.HttpServletRequest;
 

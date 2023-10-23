@@ -5,6 +5,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.gathergrid.embeddables.AddressEmail;
+import com.gathergrid.embeddables.Name;
+import com.gathergrid.embeddables.Password;
 import com.gathergrid.entities.User;
 import com.gathergrid.exceptions.costums.AlreadyExistsException;
 import com.gathergrid.exceptions.costums.DoNotExistsException;
@@ -26,20 +28,36 @@ public class UserValidationHelper {
     public UserValidationHelper(UserRepository userRepository) {
         this.userRepository = userRepository;
         this.validator = Validation.buildDefaultValidatorFactory().getValidator();
-
     }
 
     protected User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
+    protected User getUserById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    protected User getStoredLoggedUserFromSession(HttpServletRequest request) {
+        return (User) request.getSession().getAttribute("LoggedUser");
+    }
+
     protected void addAccount(User user) {
         userRepository.save(user);
     }
 
+    protected User updateAccount(User user, HttpServletRequest request) {
+        user.setId(getStoredLoggedUserFromSession(request).getId());
+        userRepository.update(user);
+        return user;
+    }
+
     protected void storeLoggedUserInSession(User user, HttpServletRequest request) {
-        HttpSession httpSession = request.getSession();
-        httpSession.setAttribute("LoggedUser", user);
+        request.getSession().setAttribute("LoggedUser", user);
+    }
+
+    protected void updateLoggedUserInSession(User user, HttpServletRequest request) {
+        request.getSession().setAttribute("LoggedUser", user);
     }
 
     protected void validateEmail(AddressEmail addressEmail) {
@@ -60,6 +78,22 @@ public class UserValidationHelper {
         }
 
         if (userNameAlreadyExists(user.getName().getUserName())) {
+            throw new AlreadyExistsException("Username is already exists");
+        }
+
+    }
+
+    protected void validateUserOnUpdate(User user, HttpServletRequest request) {
+
+        validateObject(user);
+
+        Long userId = getStoredLoggedUserFromSession(request).getId();
+
+        if (userHasUpdatesHisEmail(userId, user.getEmail()) && emailAlreadyExists(user.getEmail().getAddressEmail())) {
+            throw new AlreadyExistsException("Email is already exists");
+        }
+
+        if (userHasUpdatesHisUserName(userId, user.getName()) && userNameAlreadyExists(user.getName().getUserName())) {
             throw new AlreadyExistsException("Username is already exists");
         }
 
@@ -90,6 +124,20 @@ public class UserValidationHelper {
         }
     }
 
+    protected void validatePasswords(String userPassword, String currentPassword, String newPassword,
+            String repeatNewPassword) {
+
+        if (passwordsAreNotMatched(userPassword, currentPassword)) {
+            throw new NotMatchedException("The current password is incrorrect");
+        }
+
+        validateObject(new Password(newPassword));
+
+        if (passwordsAreNotMatched(newPassword, repeatNewPassword)) {
+            throw new NotMatchedException("Please repeat the same password");
+        }
+    }
+
     protected boolean noUserHasThisEmail(String email) {
         return !userRepository.existsByEmail(email);
     }
@@ -104,6 +152,14 @@ public class UserValidationHelper {
 
     protected boolean emailAlreadyExists(String email) {
         return userRepository.existsByEmail(email);
+    }
+
+    protected boolean userHasUpdatesHisEmail(Long userId, AddressEmail email) {
+        return !getUserById(userId).getEmail().getAddressEmail().equals(email.getAddressEmail());
+    }
+
+    protected boolean userHasUpdatesHisUserName(Long userId, Name name) {
+        return !getUserById(userId).getName().getUserName().equals(name.getUserName());
     }
 
 }

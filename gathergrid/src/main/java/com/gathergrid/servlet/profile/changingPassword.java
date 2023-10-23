@@ -1,23 +1,19 @@
-package com.gathergrid.servlet.authentification;
+package com.gathergrid.servlet.profile;
 
 import java.io.IOException;
 
-import com.gathergrid.embeddables.AddressEmail;
-import com.gathergrid.embeddables.Password;
-import com.gathergrid.entities.User;
 import com.gathergrid.exceptions.factories.ExceptionHandlerFactory;
 import com.gathergrid.exceptions.interfaces.ExceptionHandler;
 import com.gathergrid.service.UserService;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "signInServlet", urlPatterns = "/signIn")
-public class signIn extends HttpServlet {
+@WebServlet(name = "changePasswordServlet", urlPatterns = "/changePassword")
+public class changingPassword extends HttpServlet {
 
     private UserService userService;
 
@@ -30,26 +26,23 @@ public class signIn extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect(request.getContextPath() + "/authentification");
-
+        // Display the changing password form
+        request.getRequestDispatcher("/WEB-INF/profile/changePassword.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-
-        User user = new User();
-        user.setEmail(new AddressEmail(email));
-        user.setPassword(new Password(password));
+        String currentPassword = request.getParameter("current-password");
+        String newPassword = request.getParameter("new-password");
+        String repeatNewPassword = request.getParameter("repeat-new-password");
 
         try {
 
-            userService.loginUser(user, request);
+            userService.changePassword(currentPassword, newPassword, repeatNewPassword, request);
 
-            response.sendRedirect(request.getContextPath());
+            request.getSession().setAttribute("successChangingPassword", true);
 
         } catch (Exception e) {
 
@@ -57,11 +50,8 @@ public class signIn extends HttpServlet {
 
             exceptionHandler.handleException(e, request);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/authentification");
-
-            dispatcher.forward(request, response);
-
         }
 
+        response.sendRedirect(request.getContextPath() + "/changePassword");
     }
 }

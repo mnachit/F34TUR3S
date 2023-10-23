@@ -11,6 +11,7 @@ import com.gathergrid.service.imp.CommentServiceImp;
 import com.gathergrid.service.imp.EventServiceImp;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ public class EventDetail extends HttpServlet {
 
     EventServiceImp eventServiceImp;
     CommentServiceImp commentServiceImp;
+
     public void init() {
         eventServiceImp = new EventServiceImp(new EventRespository(), new CategorieRepository(), new UserRepository());
         commentServiceImp = new CommentServiceImp(new EventRespository());
@@ -54,8 +56,9 @@ public class EventDetail extends HttpServlet {
         }
 
     }
+
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//          get add comment request
+        // get add comment request
         String text = request.getParameter("text");
         Long event_id = Long.parseLong(request.getParameter("event_id"));
         User user = (User) request.getSession().getAttribute("LoggedUser");

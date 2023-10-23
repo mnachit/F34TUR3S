@@ -3,6 +3,8 @@ package com.gathergrid.servlet.profile;
 import java.io.IOException;
 
 import com.gathergrid.entities.User;
+import com.gathergrid.exceptions.factories.ExceptionHandlerFactory;
+import com.gathergrid.exceptions.interfaces.ExceptionHandler;
 import com.gathergrid.service.UserService;
 
 import jakarta.servlet.RequestDispatcher;
@@ -34,6 +36,36 @@ public class profile extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/profile/profile.jsp");
 
         dispatcher.forward(request, response);
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String userName = request.getParameter("userName");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        User user = new User(firstName, lastName, userName, email, password);
+
+        try {
+
+            userService.updateProfile(user, request);
+
+            request.getSession().setAttribute("successUpdationAccount", true);
+
+        } catch (Exception e) {
+
+            ExceptionHandler exceptionHandler = ExceptionHandlerFactory.getExceptionHandler(e);
+
+            exceptionHandler.handleException(e, request);
+
+        }
+
+        response.sendRedirect(request.getContextPath() + "/profile");
 
     }
 }

@@ -9,7 +9,8 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Entity
-@Setter@Getter
+@Setter
+@Getter
 public class Event {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)

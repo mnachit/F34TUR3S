@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile</title>
+    <title>Edit</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
@@ -16,7 +16,37 @@
 <body>
 
 <div class="container">
-    <h2>Edit Profile</h2>
+
+
+
+    <c:choose>
+        <c:when test="${successUpdationAccount}">
+            <div class="message-container" style="height: 100px; overflow-y: auto;">
+
+                <div class="alert alert-success" role="alert">
+                    Account Updated Successfully
+                </div>
+
+            </div>
+
+            <c:remove var="successUpdationAccount" scope="session"/>
+
+        </c:when>
+
+        <c:when test="${not empty errors}">
+            <div class="error-container" style="height: 100px; overflow-y: auto;">
+               <c:forEach var="error" items="${errors}">
+                    <div class="alert alert-danger" role="alert">
+                        ${error}
+                    </div>
+                </c:forEach>
+            </div>
+            <c:remove var="errors" scope="session"/>
+        </c:when>
+    </c:choose>
+
+
+    <h2>Edit Profile ssss</h2>
     
     <form action="profile" method="post">
         <!-- First Name -->
@@ -48,10 +78,15 @@
             <label for="password">Password:</label>
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
-        
+ 
         <button type="submit" class="btn btn-primary">Update Profile</button>
     </form>
+
+    <form action="changePassword" method="get">
+        <button type="submit" class="btn btn-primary">Change Password</button>
+    </form>
+
+    
 </div>
 
-<!-- Include Bootstrap JS and jQuery -->
-<script src
+

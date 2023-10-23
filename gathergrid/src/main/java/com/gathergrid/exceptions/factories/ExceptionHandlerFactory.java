@@ -8,7 +8,7 @@ import com.gathergrid.exceptions.handlers.AlreadyExistsExceptionHandler;
 import com.gathergrid.exceptions.handlers.DoNotExistsExceptionHandler;
 import com.gathergrid.exceptions.handlers.NotMatchedExceptionHandler;
 import com.gathergrid.exceptions.handlers.ValidationExceptionHandler;
-import com.gathergrid.exceptions.implementation.ExceptionHandler;
+import com.gathergrid.exceptions.interfaces.ExceptionHandler;
 
 public class ExceptionHandlerFactory {
 
