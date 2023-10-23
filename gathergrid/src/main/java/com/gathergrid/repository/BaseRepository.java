@@ -41,14 +41,22 @@ public abstract class BaseRepository<E> {
 
     public List<E> fetchAll(Class<E> entityClass) {
 
+        transaction.begin();
+
         String jpql = "SELECT e FROM " + entityClass.getSimpleName() + " e";
 
         TypedQuery<E> query = entityManager.createQuery(jpql, entityClass);
 
-        return query.getResultList();
+        List<E> entities = query.getResultList();
+
+        transaction.commit();
+
+        return entities;
     }
 
     public E findBy(Class<E> entityClass, String fieldName, Object value) {
+
+        transaction.begin();
 
         String jpql = "SELECT e FROM " + entityClass.getSimpleName() + " e WHERE e." + fieldName + " = :value";
 
@@ -56,10 +64,16 @@ public abstract class BaseRepository<E> {
 
         query.setParameter("value", value);
 
-        return query.getSingleResult();
+        E entity = query.getSingleResult();
+
+        transaction.commit();
+
+        return entity;
     }
 
     protected boolean existsByField(Class<E> entityClass, String fieldName, Object value) {
+
+        transaction.begin();
 
         String jpql = "SELECT COUNT(e) FROM " + entityClass.getSimpleName() + " e WHERE e." + fieldName + " = :value";
 
@@ -67,7 +81,11 @@ public abstract class BaseRepository<E> {
 
         query.setParameter("value", value);
 
-        return query.getSingleResult() > 0;
+        Boolean result = query.getSingleResult() > 0;
+
+        transaction.commit();
+
+        return result;
     }
 
 }

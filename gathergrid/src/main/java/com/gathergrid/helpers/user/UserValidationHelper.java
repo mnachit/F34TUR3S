@@ -55,6 +55,10 @@ public class UserValidationHelper {
         request.getSession().setAttribute("LoggedUser", user);
     }
 
+    protected void updateLoggedUserInSession(User user, HttpServletRequest request) {
+        request.getSession().setAttribute("LoggedUser", user);
+    }
+
     protected void validateEmail(AddressEmail addressEmail) {
 
         validateObject(addressEmail);

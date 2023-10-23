@@ -14,6 +14,8 @@ public class AlreadyExistsExceptionHandler implements ExceptionHandler {
 
         AlreadyExistsException alreadyExistsExceptionHandler = (AlreadyExistsException) exception;
 
+        request.getSession().setAttribute("errors", List.of(alreadyExistsExceptionHandler.getError()));
+
         request.setAttribute("errors", List.of(alreadyExistsExceptionHandler.getError()));
 
     }

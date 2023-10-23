@@ -14,6 +14,8 @@ public class NotMatchedExceptionHandler implements ExceptionHandler {
 
         NotMatchedException notMatchedException = (NotMatchedException) exception;
 
+        request.getSession().setAttribute("errors", List.of(notMatchedException.getError()));
+
         request.setAttribute("errors", List.of(notMatchedException.getError()));
 
     }

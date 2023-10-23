@@ -39,9 +39,9 @@ public class UserService extends UserValidationHelper {
 
         validatePassword(givenUser, fetchedUser);
 
-        User user = updateAccount(givenUser, request);
+        User updatedUser = updateAccount(givenUser, request);
 
-        storeLoggedUserInSession(user, request);
+        updateLoggedUserInSession(updatedUser, request);
     }
 
 }

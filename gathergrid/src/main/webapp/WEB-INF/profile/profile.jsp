@@ -18,25 +18,32 @@
 <div class="container">
 
 
-     <c:choose>
+
+    <c:choose>
         <c:when test="${successUpdationAccount}">
+            <div class="message-container" style="height: 100px; overflow-y: auto;">
+
                 <div class="alert alert-success" role="alert">
                     Account Updated Successfully
                 </div>
-        </c:when>
-    </c:choose>
 
-    <div class="error-container" style="height: 200px; overflow-y: auto;">
-        <c:choose>
-            <c:when test="${not empty errors}">
-                <c:forEach var="error" items="${errors}">
+            </div>
+
+            <c:remove var="successUpdationAccount" scope="session"/>
+            
+        </c:when>
+
+        <c:when test="${not empty errors}">
+            <div class="error-container" style="height: 100px; overflow-y: auto;">
+               <c:forEach var="error" items="${errors}">
                     <div class="alert alert-danger" role="alert">
                         ${error}
                     </div>
                 </c:forEach>
-            </c:when>
-        </c:choose>
-    </div>
+            </div>
+            <c:remove var="errors" scope="session"/>
+        </c:when>
+    </c:choose>
 
 
     <h2>Edit Profile ssss</h2>

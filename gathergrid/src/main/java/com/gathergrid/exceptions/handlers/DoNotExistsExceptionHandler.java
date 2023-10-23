@@ -14,6 +14,8 @@ public class DoNotExistsExceptionHandler implements ExceptionHandler {
 
         DoNotExistsException DoNotExistsExceptionHandler = (DoNotExistsException) exception;
 
+        request.getSession().setAttribute("errors", List.of(DoNotExistsExceptionHandler.getError()));
+
         request.setAttribute("errors", List.of(DoNotExistsExceptionHandler.getError()));
 
     }

@@ -55,7 +55,7 @@ public class profile extends HttpServlet {
 
             userService.updateProfile(user, request);
 
-            request.setAttribute("successUpdationAccount", true);
+            request.getSession().setAttribute("successUpdationAccount", true);
 
         } catch (Exception e) {
 
@@ -65,9 +65,7 @@ public class profile extends HttpServlet {
 
         }
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/profile");
-
-        dispatcher.forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/profile");
 
     }
 }
