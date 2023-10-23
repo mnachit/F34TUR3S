@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import com.gathergrid.embeddables.AddressEmail;
 import com.gathergrid.embeddables.Name;
+import com.gathergrid.embeddables.Password;
 import com.gathergrid.entities.User;
 import com.gathergrid.exceptions.costums.AlreadyExistsException;
 import com.gathergrid.exceptions.costums.DoNotExistsException;
@@ -120,6 +121,20 @@ public class UserValidationHelper {
                     .map(ConstraintViolation::getMessage)
                     .collect(Collectors.toList());
             throw new ValidationException(errors);
+        }
+    }
+
+    protected void validatePasswords(String userPassword, String currentPassword, String newPassword,
+            String repeatNewPassword) {
+
+        if (passwordsAreNotMatched(userPassword, currentPassword)) {
+            throw new NotMatchedException("The current password is incrorrect");
+        }
+
+        validateObject(new Password(newPassword));
+
+        if (passwordsAreNotMatched(newPassword, repeatNewPassword)) {
+            throw new NotMatchedException("Please repeat the same password");
         }
     }
 

@@ -30,7 +30,7 @@
             </div>
 
             <c:remove var="successUpdationAccount" scope="session"/>
-            
+
         </c:when>
 
         <c:when test="${not empty errors}">
@@ -78,9 +78,15 @@
             <label for="password">Password:</label>
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
-        
+ 
         <button type="submit" class="btn btn-primary">Update Profile</button>
     </form>
+
+    <form action="changePassword" method="get">
+        <button type="submit" class="btn btn-primary">Change Password</button>
+    </form>
+
+    
 </div>
 
 
