@@ -64,8 +64,10 @@ public class MyEventsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         User loggedUser = (User) req.getSession().getAttribute("LoggedUser");
         Long deleteId;
+        Long editId;
             try {
                 deleteId = req.getParameter("delete_id") != null ? Long.valueOf(req.getParameter("delete_id")) : null;
+                editId = req.getParameter("edit_id") != null ? Long.valueOf(req.getParameter("edit_id")) : null;
             }
             catch (NumberFormatException e){
                 req.getSession().setAttribute("error", "Invalid Event Id");
@@ -81,6 +83,10 @@ public class MyEventsServlet extends HttpServlet {
                 req.getSession().setAttribute("error", res.getMessage());
                 resp.sendRedirect(req.getContextPath() + "/myEvents");
             }
+            return;
+        }
+        if (editId != null) {
+            resp.sendRedirect(req.getContextPath()+ req.getServletPath() + "/edit?id=" + editId);
             return;
         }
 
