@@ -60,6 +60,8 @@ public class signUp extends HttpServlet {
 
         }
 
+        request.setAttribute("userOnRegistration", user);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("/authentification");
 
         dispatcher.forward(request, response);
