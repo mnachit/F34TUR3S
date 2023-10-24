@@ -57,6 +57,8 @@ public class signIn extends HttpServlet {
 
             exceptionHandler.handleException(e, request);
 
+            request.setAttribute("userOnLogin", user);
+
             RequestDispatcher dispatcher = request.getRequestDispatcher("/authentification");
 
             dispatcher.forward(request, response);

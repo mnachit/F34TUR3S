@@ -65,7 +65,7 @@
             <form action="signIn" method="post">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                    <input type="email" id="loginName" name="email" class="form-control" />
+                    <input type="email" id="loginName" name="email" class="form-control" value="${userOnLogin.email.addressEmail}"/>
                     <label class="form-label" for="loginName">Email</label>
                 </div>
                 <!-- Password input -->
@@ -85,20 +85,20 @@
             <form method="post" action="signUp">
                 <!-- Name input -->
                 <div class="form-outline mb-4">
-                    <input type="text"  class="form-control" name="firstName" />
+                    <input type="text"  class="form-control" name="firstName" value="${userOnRegistration.name.firstName}"/>
                     <label class="form-label" >Firstname</label>
                 </div>
                 <div class="form-outline mb-4">
-                    <input type="text"  class="form-control" name="lastName" />
+                    <input type="text"  class="form-control" name="lastName" value="${userOnRegistration.name.lastName}"/>
                     <label class="form-label" >Lastname</label>
                 </div>
                 <div class="form-outline mb-4">
-                    <input type="text"  class="form-control" name="userName" />
-                    <label class="form-label" >Lastname</label>
+                    <input type="text"  class="form-control" name="userName" value="${userOnRegistration.name.userName}"/>
+                    <label class="form-label" >UserName</label>
                 </div>
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                    <input type="text" id="registerEmail" class="form-control" name="email" />
+                    <input type="text" id="registerEmail" class="form-control" name="email" value="${userOnRegistration.email.addressEmail}"/>
                     <label class="form-label" for="registerEmail">Email</label>
                 </div>
                 <!-- Password input -->
