@@ -8,7 +8,7 @@ import com.gathergrid.repository.EventRespository;
 import com.gathergrid.repository.UserRepository;
 import com.gathergrid.service.CategoryService;
 import com.gathergrid.service.EventService;
-import com.gathergrid.service.imp.EventServiceImp;
+import com.gathergrid.service.EventServiceImp;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

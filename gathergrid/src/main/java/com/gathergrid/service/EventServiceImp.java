@@ -1,4 +1,4 @@
-package com.gathergrid.service.imp;
+package com.gathergrid.service;
 
 import com.gathergrid.entities.Categorie;
 import com.gathergrid.entities.Event;

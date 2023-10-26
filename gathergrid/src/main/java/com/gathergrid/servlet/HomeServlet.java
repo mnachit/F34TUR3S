@@ -5,7 +5,7 @@ import com.gathergrid.entities.Response;
 import com.gathergrid.repository.CategorieRepository;
 import com.gathergrid.repository.EventRespository;
 import com.gathergrid.repository.UserRepository;
-import com.gathergrid.service.imp.EventServiceImp;
+import com.gathergrid.service.EventServiceImp;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

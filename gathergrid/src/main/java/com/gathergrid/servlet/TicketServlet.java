@@ -1,6 +1,6 @@
 package com.gathergrid.servlet;
 
-import com.gathergrid.service.imp.TicketServiceImp;
+import com.gathergrid.service.TicketServiceImp;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

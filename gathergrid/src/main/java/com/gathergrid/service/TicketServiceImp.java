@@ -1,4 +1,4 @@
-package com.gathergrid.service.imp;
+package com.gathergrid.service;
 
 import com.gathergrid.entities.Event;
 import com.gathergrid.entities.Response;
@@ -25,11 +25,9 @@ public class TicketServiceImp {
     public void createTicket(Long eventId, Long userId) {
         Event event = eventRepository.findById(eventId);
         User user = userRepository.findById(userId);
-
         if (event != null && user != null) {
             Date date = new Date(System.currentTimeMillis());
             Ticket ticket = new Ticket(date, user, event);
-
             ticketRepository.save(ticket);
         }
     }
